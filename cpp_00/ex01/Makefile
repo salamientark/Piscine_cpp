@@ -3,14 +3,16 @@ CPP = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 ### INCLUDES ###
-PROJECT = 
+PROJECT = phonebook
 PROJECT_DIR = ./
 
-SRC_DIR = ./
-SRC_FILE =  
+SRC_DIR = ./src
+SRC_FILE = Phonebook.class.cpp \
+			Contact.class.cpp \
+			main.cpp 
 			   
 ### HEADER FILE ###
-HEADER_DIR = includes
+# HEADER_DIR = includes
 
 ## OBJECT FILE ###
 OBJ_DIR = .obj
