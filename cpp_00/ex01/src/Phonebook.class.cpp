@@ -17,6 +17,7 @@ void	Phonebook::add_contact( void )
 
 	this->_book[this->_last_index].fill_contact();
 	this->_last_index = (this->_last_index + 1) % 8;	
+	std::cin.ignore(1, '\n');
 }
 
 void	Phonebook::display( void ) const
