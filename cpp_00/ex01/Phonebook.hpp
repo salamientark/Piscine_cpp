@@ -1,7 +1,8 @@
 #ifndef PHONEBOOK_CLASS_HPP
 # define PHONEBOOK_CLASS_HPP
 
-# include "Contact.class.hpp"
+# include "Contact.hpp"
+# include <sstream>
 
 class Phonebook {
 	private:

@@ -1,11 +1,4 @@
-#include "Phonebook.class.hpp"
-#include <cctype>
-#include <cmath>
-#include <iomanip>
-#include <iostream>
-#include <ostream>
-#include <sstream>
-#include <string>
+#include "Phonebook.hpp"
 
 Phonebook::Phonebook () : _last_index(0), _size(0)
 {

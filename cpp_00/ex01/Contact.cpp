@@ -1,6 +1,5 @@
-#include <cctype>
 #include <iostream>
-#include "Contact.class.hpp"
+#include "Contact.hpp"
 
 using namespace std;
 

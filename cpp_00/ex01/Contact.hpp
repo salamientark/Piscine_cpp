@@ -2,6 +2,8 @@
 # define CONTACT_CLASS_HPP
 
 # include <string>
+# include <iostream>
+#include <iomanip>
 
 class Contact {
 	public:

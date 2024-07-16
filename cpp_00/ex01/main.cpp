@@ -1,6 +1,5 @@
-#include "Phonebook.class.hpp"
+#include "Phonebook.hpp"
 #include <iostream>
-#include <ostream>
 #include <string>
 
 using namespace std;
