@@ -6,12 +6,12 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:32:38 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/16 15:32:41 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/16 15:37:18 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_CLASS_HPP
-# define PHONEBOOK_CLASS_HPP
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
 # include "Contact.hpp"
 # include <sstream>

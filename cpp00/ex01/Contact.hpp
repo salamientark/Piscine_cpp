@@ -6,12 +6,12 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:33:09 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/16 15:33:10 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/16 15:37:01 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_CLASS_HPP
-# define CONTACT_CLASS_HPP
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
 # include <string>
 # include <iostream>
