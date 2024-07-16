@@ -6,9 +6,11 @@
 class Phonebook {
 	private:
 		int		_last_index;
+		int		_size;
 		Contact	_book[8];	
 
 		void	display( void ) const;
+		void	display_one_contact(int index) const;
 	public:
 		Phonebook(void);
 		~Phonebook(void);
