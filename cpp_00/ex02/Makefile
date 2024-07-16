@@ -6,7 +6,7 @@ CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 PROJECT = bankster
 PROJECT_DIR = ./
 
-SRC_DIR = ./src
+SRC_DIR = ./
 SRC_FILE = Account.cpp \
 			tests.cpp
 			   
