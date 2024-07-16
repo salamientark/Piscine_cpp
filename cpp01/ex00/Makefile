@@ -3,11 +3,14 @@ CPP = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 ### INCLUDES ###
-PROJECT = 
+PROJECT = brainz 
 PROJECT_DIR = ./
 
 SRC_DIR = ./
-SRC_FILE =
+SRC_FILE = Zombie.cpp \
+		   randomChump.cpp \
+		   newZombie.cpp \
+		   main.cpp
 			   
 ### HEADER FILE ###
 # HEADER_DIR = includes

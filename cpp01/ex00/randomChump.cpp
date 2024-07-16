@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 15:35:56 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/16 17:26:44 by madlab           ###   ########.fr       */
+/*   Created: 2024/07/16 18:23:20 by madlab            #+#    #+#             */
+/*   Updated: 2024/07/16 18:24:59 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include <string>
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#include "Zombie.hpp"
 
-class Zombie {
-public:
-	Zombie( void );
-	Zombie( std::string name );
-	~Zombie( void );
-
-	void	annonce( void );
-private:
-	std::string	name;
-};
-
-Zombie*	newZombie( std::string name );
-void	randomChump( std::string name );
-
-#endif
+void	randomChump( std::string name )
+{
+	Zombie	z(name);
+	z.annonce();
+}
