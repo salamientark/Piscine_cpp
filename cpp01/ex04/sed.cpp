@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 10:23:48 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/17 15:36:13 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/17 18:13:12 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,19 @@ int	copy_and_replace(std::ifstream & ifs, std::ofstream & output,
 {
 	std::string				input((std::istreambuf_iterator<char>(ifs)),
 									std::istreambuf_iterator<char>());
+	std::string				buffer;
 	std::size_t				pos = 0;
 	std::size_t				offset = 0;
-	const std::size_t		len = input.length();
-	const std::size_t		s2_len = s2.length();
+	const std::size_t		s1_len = s1.length();
 
-	while (pos < len)
+	while ((offset = input.find(s1, pos)) != input.npos)
 	{
-		offset = input.find(s1, pos);
-		if (offset == input.npos)
-		{
-			output.write(&input[pos], len - pos);
-			break ;
-		}
-		output.write(&input[pos], offset - pos);
-		output.write(s2.c_str(), s2_len);
-		pos = offset + s1.length();
+		buffer = input.substr(offset + s1_len);
+		input.erase(offset, input.npos);
+		input += s2 + buffer;
+		pos = offset;
 	}
+	output << input;
 	return (0);
 }
 
