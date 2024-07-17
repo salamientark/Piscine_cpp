@@ -11,3 +11,5 @@
         > Check if everything normal
     ### EX03
         > Look at how we can do it
+    ### EX04
+        > Peut on utiliser strerror et errno fromn <cstring>
