@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 15:35:56 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/16 22:47:13 by madlab           ###   ########.fr       */
+/*   Created: 2024/07/16 23:46:47 by madlab            #+#    #+#             */
+/*   Updated: 2024/07/17 10:07:30 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include <string>
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#ifndef HUMANB_HPP
+# define HUMANB_HPP
 
-class Zombie {
+# include "Weapon.hpp"
+# include <string>
+
+class HumanB {
 public:
-	Zombie( void );
-	Zombie( std::string name );
-	~Zombie( void );
+	HumanB( std::string name );
+	~HumanB( void );
 
-	void	annonce( void );
+	void	setWeapon( Weapon weapon );
+
+	void	attack( void ) const;
+
 private:
 	std::string	name;
+	Weapon*		weapon;
 };
 
-Zombie*	newZombie( std::string name );
-void	randomChump( std::string name );
-
-#endif
+#endif // HUMANA_HPP

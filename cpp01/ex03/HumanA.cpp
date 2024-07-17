@@ -1,43 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 15:40:08 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/16 22:47:19 by madlab           ###   ########.fr       */
+/*   Created: 2024/07/16 23:51:45 by madlab            #+#    #+#             */
+/*   Updated: 2024/07/17 10:13:24 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "HumanA.hpp"
 #include <iostream>
 
 // ************************************************************************** //
-//                               Constructor & Destructor                     //
+//                            Constructor & Destructor                        //
 // ************************************************************************** //
 
-Zombie::Zombie( void ) : name("default")
+HumanA::HumanA( std::string name, Weapon& weapon )
+	: name(name), weapon(weapon)
 {
 
 }
 
-Zombie::Zombie(std::string name) : name(name)
+HumanA::~HumanA( void )
 {
-	std::cout << this->name << " was created !" << std::endl;
+
 }
 
-Zombie::~Zombie( void )
-{
-	std::cout << this->name << " was destroyed !" << std::endl;
-}
-
-
 // ************************************************************************** //
-//                           Public Member function                           //
+//                            Public member function                          //
 // ************************************************************************** //
 
-void	Zombie::annonce( void )
+void	HumanA::attack( void ) const
 {
-	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << this->name << " attacks with their " << this->weapon.getType() << std::endl;
 }

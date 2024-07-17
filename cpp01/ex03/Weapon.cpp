@@ -1,43 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 15:40:08 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/16 22:47:19 by madlab           ###   ########.fr       */
+/*   Created: 2024/07/16 23:34:02 by madlab            #+#    #+#             */
+/*   Updated: 2024/07/16 23:52:17 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-#include <iostream>
+#include "Weapon.hpp"
+#include <string>
 
 // ************************************************************************** //
-//                               Constructor & Destructor                     //
+//                            Constructor & Destructor                        //
 // ************************************************************************** //
 
-Zombie::Zombie( void ) : name("default")
+Weapon::Weapon( void )
+	: type("none")
 {
 
 }
 
-Zombie::Zombie(std::string name) : name(name)
+Weapon::Weapon( std::string type )
+	: type(type)
 {
-	std::cout << this->name << " was created !" << std::endl;
+
 }
 
-Zombie::~Zombie( void )
+Weapon::~Weapon( void )
 {
-	std::cout << this->name << " was destroyed !" << std::endl;
+
 }
 
-
 // ************************************************************************** //
-//                           Public Member function                           //
+//                            Public member function                          //
 // ************************************************************************** //
-
-void	Zombie::annonce( void )
+const std::string&	Weapon::getType( void ) const
 {
-	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	return (this->type);
+}
+
+void	Weapon::setType( std::string type )
+{
+	this->type = type;
 }

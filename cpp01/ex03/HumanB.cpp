@@ -1,43 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 15:40:08 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/16 22:47:19 by madlab           ###   ########.fr       */
+/*   Created: 2024/07/16 23:51:45 by madlab            #+#    #+#             */
+/*   Updated: 2024/07/17 10:16:32 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "HumanB.hpp"
+#include "Weapon.hpp"
 #include <iostream>
 
 // ************************************************************************** //
-//                               Constructor & Destructor                     //
+//                            Constructor & Destructor                        //
 // ************************************************************************** //
 
-Zombie::Zombie( void ) : name("default")
+HumanB::HumanB( std::string name )
+	: name(name)
 {
 
 }
 
-Zombie::Zombie(std::string name) : name(name)
+HumanB::~HumanB( void )
 {
-	std::cout << this->name << " was created !" << std::endl;
+
 }
 
-Zombie::~Zombie( void )
+// ************************************************************************** //
+//                               getters & setters                            //
+// ************************************************************************** //
+void	HumanB::setWeapon( Weapon weapon )
 {
-	std::cout << this->name << " was destroyed !" << std::endl;
+	*this->weapon = weapon;
 }
 
-
 // ************************************************************************** //
-//                           Public Member function                           //
+//                            Public member function                          //
 // ************************************************************************** //
 
-void	Zombie::annonce( void )
+void	HumanB::attack( void ) const
 {
-	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << this->name << " attacks with their " << this->weapon->getType() << std::endl;
 }

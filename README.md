@@ -7,3 +7,7 @@
         > Remove cout in constructor
     ### EX01
         > Remove cout in constructor & destructor
+    ### EX02
+        > Check if everything normal
+    ### EX03
+        > Look at how we can do it

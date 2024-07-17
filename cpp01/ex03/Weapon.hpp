@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 15:35:56 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/16 22:47:13 by madlab           ###   ########.fr       */
+/*   Created: 2024/07/16 23:29:45 by madlab            #+#    #+#             */
+/*   Updated: 2024/07/16 23:43:07 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include <string>
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#ifndef WEAPON_HPP
+# define WEAPON_HPP
 
-class Zombie {
+# include <string>
+
+class Weapon {
 public:
-	Zombie( void );
-	Zombie( std::string name );
-	~Zombie( void );
+	Weapon( void );
+	Weapon( std::string type );
+	~Weapon( void );
 
-	void	annonce( void );
+	const std::string&	getType( void ) const;
+	void				setType( std::string type );
+
 private:
-	std::string	name;
+	std::string	type;
 };
-
-Zombie*	newZombie( std::string name );
-void	randomChump( std::string name );
 
 #endif
