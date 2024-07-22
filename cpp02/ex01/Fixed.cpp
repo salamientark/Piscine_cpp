@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:04:42 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/22 09:56:00 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/22 09:59:52 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,16 @@ Fixed::Fixed( const float nbr )
 	this->_nbr = (this->_nbr << 1);
 	for (int i = 0; i < 7; i++)
 	{
-		if (std::abs(floating_part - ref) > 0.00390625f)
+		if (std::abs(floating_part - ref) >= 0.00390625f && floating_part > ref)
 		{
-			if (floating_part > ref)
-			{
-				this->_nbr = (this->_nbr | 1);
-				floating_part -= ref;
-			}
+			this->_nbr = (this->_nbr | 1);
+			floating_part -= ref;
 		}
-		else {
-			if (std::abs(floating_part - ref) < floating_part)
-			{
-				this->_nbr = (this->_nbr | 1);
-				floating_part -= ref;
-			}
+		if (std::abs(floating_part - ref) < 0.00390625f
+			&& std::abs(floating_part - ref) < floating_part)
+		{
+			this->_nbr = (this->_nbr | 1);
+			floating_part -= ref;
 		}
 		ref /= 2;
 		this->_nbr = (this->_nbr << 1);
