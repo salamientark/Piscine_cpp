@@ -6,13 +6,14 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:04:42 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/22 09:00:22 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/22 09:47:36 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include <iostream>
 #include <ostream>
+#include <cstdlib>
 
 Fixed::Fixed( void ) : _nbr(0)
 {
@@ -26,23 +27,32 @@ Fixed::Fixed( const int nbr ) : _nbr((nbr << 8))
 
 Fixed::Fixed( const float nbr )
 {
-	float	floating_part;
+	float	floating_part = (nbr - (int)nbr);
 	int		converted_nbr = 0;
 	float	ref = 0.5f;
 
 	std::cout << "Float constructor called" << std::endl;
 	this->_nbr = (int)nbr;
-	this->_nbr = (this->_nbr << 8);
-	floating_part = (nbr - (int)nbr);
+	this->_nbr = (this->_nbr << 1);
 	for (int i = 0; i < 7; i++)
 	{
-		if (floating_part > ref)
+		if (std::abs(floating_part - ref) > 0.00390625f)
 		{
-			converted_nbr++;
-			floating_part -= ref;
+			if (floating_part > ref)
+			{
+				this->_nbr = (this->_nbr | 1);
+				floating_part -= ref;
+			}
+		}
+		else {
+			if (std::abs(floating_part - ref) < floating_part)
+			{
+				this->_nbr = (this->_nbr | 1);
+				floating_part -= ref;
+			}
 		}
 		ref /= 2;
-		converted_nbr = (converted_nbr << 1);
+		this->_nbr = (this->_nbr << 1);
 	}
 	this->_nbr = (this->_nbr | converted_nbr);
 }
