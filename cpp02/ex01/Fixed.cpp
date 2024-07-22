@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:04:42 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/22 09:47:36 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/22 09:56:00 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Fixed::Fixed( const int nbr ) : _nbr((nbr << 8))
 
 Fixed::Fixed( const float nbr )
 {
-	float	floating_part = (nbr - (int)nbr);
+	float	floating_part = (std::abs(nbr) - (int)std::abs(nbr));
 	int		converted_nbr = 0;
 	float	ref = 0.5f;
 
@@ -103,7 +103,10 @@ float	Fixed::toFloat( void ) const
 	result = (float)(this->_nbr >> 8);
 	for (int i = 0; i < 8; i++)	
 	{
-		result += (ref * ((mask & this->_nbr) > 0));
+		if (this->_nbr < 0)
+			result -= (ref * ((mask & this->_nbr) > 0));
+		else
+			result += (ref * ((mask & this->_nbr) > 0));
 		ref /= 2;
 		mask = (mask >> 1);
 	}

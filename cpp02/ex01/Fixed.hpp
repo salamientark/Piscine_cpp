@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:37:52 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/22 09:00:26 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/22 09:57:04 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ public:
 	int		toInt( void ) const;
 
 private:
-	// static const int	makeBinaryPart(const float nbr );
-
 	static const int	_fractBitNbr = 8;
 
 	int		_nbr;
