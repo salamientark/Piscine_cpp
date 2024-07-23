@@ -6,11 +6,12 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:04:42 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/22 09:59:52 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/23 17:48:25 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+#include <cmath>
 #include <iostream>
 #include <ostream>
 #include <cstdlib>
@@ -27,30 +28,7 @@ Fixed::Fixed( const int nbr ) : _nbr((nbr << 8))
 
 Fixed::Fixed( const float nbr )
 {
-	float	floating_part = (std::abs(nbr) - (int)std::abs(nbr));
-	int		converted_nbr = 0;
-	float	ref = 0.5f;
-
-	std::cout << "Float constructor called" << std::endl;
-	this->_nbr = (int)nbr;
-	this->_nbr = (this->_nbr << 1);
-	for (int i = 0; i < 7; i++)
-	{
-		if (std::abs(floating_part - ref) >= 0.00390625f && floating_part > ref)
-		{
-			this->_nbr = (this->_nbr | 1);
-			floating_part -= ref;
-		}
-		if (std::abs(floating_part - ref) < 0.00390625f
-			&& std::abs(floating_part - ref) < floating_part)
-		{
-			this->_nbr = (this->_nbr | 1);
-			floating_part -= ref;
-		}
-		ref /= 2;
-		this->_nbr = (this->_nbr << 1);
-	}
-	this->_nbr = (this->_nbr | converted_nbr);
+	this->_nbr = (round(nbr * (1 << Fixed::_fractBitNbr)));
 }
 
 Fixed::Fixed( Fixed const & rhs )
