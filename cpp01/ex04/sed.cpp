@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 10:23:48 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/17 18:13:12 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/24 07:19:12 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ int	sed( const char *filename, const std::string s1, const std::string s2 )
 	std::ifstream	ifs;
 	std::ofstream	ofs;
 
+	if (s1.length() == 0)
+	{
+		std::cerr << "s1 must be a word" << std::endl;
+		return (1);
+	}
 	ifs.open(filename, std::ios::in);
 	if (!ifs.is_open())
 	{

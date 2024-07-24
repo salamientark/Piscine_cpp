@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 23:46:47 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/17 10:07:30 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/24 07:05:46 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ public:
 	HumanB( std::string name );
 	~HumanB( void );
 
-	void	setWeapon( Weapon weapon );
+	void	setWeapon( Weapon& weapon );
 
 	void	attack( void ) const;
 

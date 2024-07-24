@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:45:51 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/16 18:38:35 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/24 06:45:01 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main( void )
 {
-	Zombie*	zombie_a = newZombie("Mogoul");
+	Zombie*	zombie_a = newZombie("Jojo");
 
-	randomChump("zdraa");
+	randomChump("Bob");
 	zombie_a->annonce();
 	delete zombie_a;
 }
