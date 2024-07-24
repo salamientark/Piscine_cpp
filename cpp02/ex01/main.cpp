@@ -19,5 +19,11 @@ int main( void ) {
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
+	Fixed	h(2147483647);
+	std::cout << "h = " << h << std::endl;
+
+	Fixed	j(-2147483647);
+	std::cout << "j = " << j << std::endl;
+
 	return 0;
 }

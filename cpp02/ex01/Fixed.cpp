@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:04:42 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/23 17:48:25 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/07/24 11:43:53 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Fixed::Fixed( void ) : _nbr(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed( const int nbr ) : _nbr((nbr << 8))
+Fixed::Fixed( const int nbr ) : _nbr(nbr << 8)
 {
 	std::cout << "Int constructor was called" << std::endl;
 }
