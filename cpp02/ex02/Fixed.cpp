@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/20 15:04:42 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/22 20:20:07 by madlab           ###   ########.fr       */
+/*   Created: 2024/07/26 08:34:17 by madlab            #+#    #+#             */
+/*   Updated: 2024/07/26 08:40:54 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+#include <cmath>
 #include <iostream>
 #include <ostream>
 #include <cstdlib>
@@ -24,33 +25,11 @@ Fixed::Fixed( const int nbr ) : _nbr((nbr << 8))
 {
 }
 
-// Problem is here, Doesn' t round up correctly
 Fixed::Fixed( const float nbr )
 {
-	float	floating_part = (std::abs(nbr) - (int)std::abs(nbr));
-	float	ref = 0.5f;
-
-	this->_nbr = (int)nbr;
-	this->_nbr = (this->_nbr << 1);
-	for (int i = 0; i < 7; i++)
-	{
-		if (std::abs((double))
-
-		if (std::abs(floating_part - ref) >= 0.00390625f && floating_part > ref)
-		{
-			this->_nbr = (this->_nbr | 1);
-			floating_part -= ref;
-		}
-		if (std::abs(floating_part - ref) < 0.00390625f
-			&& std::abs(floating_part - ref) < floating_part)
-		{
-			this->_nbr = (this->_nbr | 1);
-			floating_part -= ref;
-		}
-		ref /= 2;
-		this->_nbr = (this->_nbr << 1);
-	}
-	this->_nbr = (this->_nbr);
+	this->_nbr = (round(nbr * (1 << Fixed::_fractBitNbr)));
+	if (nbr < 0 && (this->_nbr & 0xFF) != 0)
+		this->_nbr += 256;
 }
 
 Fixed::Fixed( Fixed const & rhs )
@@ -63,71 +42,73 @@ Fixed::~Fixed( void )
 }
 // Constructor and Destructor END
 
-// OPERATOR Overload
+// OPERATOR OVERLOAD
 Fixed & Fixed::operator=( Fixed const & rhs )
 {
 	this->_nbr = rhs.getRawBits();
 	return (*this);
 }
 
-bool	Fixed::operator<( const Fixed& rhs )
+bool	Fixed::operator<( const Fixed & rhs ) const
 {
 	return (this->_nbr < rhs.getRawBits());
 }
 
-bool	Fixed::operator>( const Fixed& rhs )
+bool	Fixed::operator>( const Fixed & rhs ) const
 {
 	return (this->_nbr > rhs.getRawBits());
 }
 
-bool	Fixed::operator<=( const Fixed& rhs )
+bool	Fixed::operator<=( const Fixed & rhs ) const
 {
-	return (rhs.getRawBits() > this->_nbr );
+	return (!(this->_nbr > rhs.getRawBits()));
 }
 
-bool	Fixed::operator>=( const Fixed& rhs )
+bool	Fixed::operator>=( const Fixed & rhs ) const
 {
-	return (rhs.getRawBits() < this->_nbr );
+	return (!(this->_nbr < rhs.getRawBits()));
 }
 
-bool	Fixed::operator==( const Fixed& rhs )
+bool	Fixed::operator==( const Fixed & rhs ) const
 {
-	return (rhs.getRawBits() == this->_nbr );
+	return (this->_nbr == rhs.getRawBits());
 }
 
-bool	Fixed::operator!=( const Fixed& rhs )
+bool	Fixed::operator!=( const Fixed & rhs ) const
 {
-	return (!(rhs.getRawBits() == this->_nbr ));
+	return (this->_nbr != rhs.getRawBits());
 }
 
-// operator +, -, *, /
-Fixed&	Fixed::operator+( const Fixed& rhs )
+Fixed	Fixed::operator+( Fixed const & rhs ) const
 {
-	this->_nbr = (this->_nbr + rhs.getRawBits());
-	return (*this);
+	return (Fixed(this->_nbr + rhs.getRawBits()));
 }
 
-Fixed&	Fixed::operator-( const Fixed& rhs )
+Fixed	Fixed::operator-( Fixed const & rhs ) const
 {
-	this->_nbr = (this->_nbr - rhs.getRawBits());
-	return (*this);
+	Fixed	result;
+	result.setRawBits(this->_nbr - rhs.getRawBits());
+	if (rhs.toFloat() > this->toFloat())
+		result.setRawBits(result.getRawBits() + 256);
+	return (result);
 }
 
-Fixed&	Fixed::operator*( const Fixed& rhs )
+Fixed	Fixed::operator*( Fixed const & rhs ) const
 {
-	int	result = ((this->_nbr) * (rhs.getRawBits()));
-	this->_nbr = result >> 8;
-	return (*this);
+	Fixed	result;
+	result.setRawBits((this->_nbr * rhs.getRawBits()) >> 8);
+
+	return (result);
 }
 
-Fixed&	Fixed::operator/( const Fixed& rhs )
+Fixed	Fixed::operator/( Fixed const & rhs ) const
 {
-	this->_nbr = (this->_nbr / rhs.getRawBits()); 
-	// this->setRawBits( this->toFloat() / rhs.toFloat()); 
-	return (*this);
+	Fixed	result;
+	result.setRawBits((this->_nbr << 8) / rhs.getRawBits());
+
+	return (result);
 }
 
-// ++X, X++, --X, X--
 Fixed&	Fixed::operator++( void )
 {
 	this->_nbr++;
@@ -137,7 +118,7 @@ Fixed&	Fixed::operator++( void )
 Fixed	Fixed::operator++( int )
 {
 	Fixed	old = *this;
-	operator++();
+	this->_nbr++;
 	return (old);
 }
 

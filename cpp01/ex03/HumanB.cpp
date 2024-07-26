@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 23:51:45 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/17 10:16:32 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/24 07:11:57 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 HumanB::HumanB( std::string name )
 	: name(name)
 {
-
 }
 
 HumanB::~HumanB( void )
@@ -32,9 +31,9 @@ HumanB::~HumanB( void )
 // ************************************************************************** //
 //                               getters & setters                            //
 // ************************************************************************** //
-void	HumanB::setWeapon( Weapon weapon )
+void	HumanB::setWeapon( Weapon& weapon )
 {
-	*this->weapon = weapon;
+	this->weapon = &weapon;
 }
 
 // ************************************************************************** //

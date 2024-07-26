@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 23:21:41 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/18 14:46:16 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/24 07:40:49 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ void	Harl::complain( std::string level )
 {
 	for (int i = 0; i < 4; i++) {
 		if (this->fct_lst[i].first == level)
-			// How to call a member function pointer
+		{
+			std::cout << "[ " + this->fct_lst[i].first + " ]" << std::endl;
 			(this->*(fct_lst[i].second))();
+			std::cout << std::endl;
+		}
 	}
 }

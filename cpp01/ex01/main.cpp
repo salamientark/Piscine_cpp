@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:45:51 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/16 22:00:40 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/24 06:46:48 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main( void )
 {
-	Zombie*	horde = zombieHorde(5, "Mogoul");
+	Zombie*	horde = zombieHorde(5, "Jojo");
 	if (!horde)
 		return (0);
 	
