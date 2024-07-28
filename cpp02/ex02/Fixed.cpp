@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 08:34:17 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/26 08:40:54 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/28 22:06:52 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,22 @@ Fixed::Fixed( void ) : _nbr(0)
 
 Fixed::Fixed( const int nbr ) : _nbr((nbr << 8))
 {
+	if ((nbr & 0x80000000) == 0)
+		this->_nbr = ((nbr << 8) & 0x7FFFFFFF);
+	else
+		this->_nbr = ((nbr << 8) | 0x8000000);
+	return ;
 }
 
 Fixed::Fixed( const float nbr )
 {
-	this->_nbr = (round(nbr * (1 << Fixed::_fractBitNbr)));
-	if (nbr < 0 && (this->_nbr & 0xFF) != 0)
-		this->_nbr += 256;
+	std::cout << "Float constructor called" << std::endl;
+	if (nbr < 0)
+		this->_nbr = round(nbr * (1 << Fixed::_fractBitNbr));
+	else
+		this->_nbr = (((int)round(-nbr * (1 << Fixed::_fractBitNbr))) ^ 0xFFFFFFFF) + 1;	 
+
+	return ;
 }
 
 Fixed::Fixed( Fixed const & rhs )
@@ -81,15 +90,17 @@ bool	Fixed::operator!=( const Fixed & rhs ) const
 
 Fixed	Fixed::operator+( Fixed const & rhs ) const
 {
-	return (Fixed(this->_nbr + rhs.getRawBits()));
+	Fixed	result;
+	result.setRawBits(this->_nbr + rhs.getRawBits());
+
+	return (result);
 }
 
 Fixed	Fixed::operator-( Fixed const & rhs ) const
 {
 	Fixed	result;
 	result.setRawBits(this->_nbr - rhs.getRawBits());
-	if (rhs.toFloat() > this->toFloat())
-		result.setRawBits(result.getRawBits() + 256);
+
 	return (result);
 }
 
@@ -157,26 +168,28 @@ void	Fixed::setRawBits( int const raw )
 // Public Memeber functions
 float	Fixed::toFloat( void ) const
 {
-	float	result;
+	char	sign = (this->_nbr & 0x80000000) != 0;
+	int		abs_nbr = ((this->_nbr & 0x80000000) != 0 ? (this->_nbr ^ 0xFFFFFFFF) + 1 : this->_nbr);
+	float	result = (float)(abs_nbr >> 8);
 	int		mask = 128;
 	float	ref = 0.5f;
 
-	result = (float)(this->_nbr >> 8);
 	for (int i = 0; i < 8; i++)	
 	{
-		if (this->_nbr < 0)
-			result -= (ref * ((mask & this->_nbr) > 0));
-		else
-			result += (ref * ((mask & this->_nbr) > 0));
+		result += (ref * ((mask & abs_nbr) > 0));
 		ref /= 2;
 		mask = (mask >> 1);
 	}
-	return (result);
+	if (sign == 0)
+		return (result);
+	return (-result);
 }
 
 int		Fixed::toInt( void ) const
 {
-	return ((this->_nbr >> 8));
+	if ((this->_nbr & 0x80000000) == 0)
+		return ((this->_nbr >> 8));
+	return ((this->_nbr >> 8) | 0xFF000000);
 }
 
 // Static Memeber functions
@@ -198,12 +211,12 @@ Fixed& Fixed::max( Fixed & lhs, Fixed& rhs )
 {
 	if (rhs < lhs)
 		return (lhs);
-	return (lhs);
+	return (rhs);
 }
 
 const Fixed& Fixed::max( const Fixed & lhs, const Fixed& rhs )
 {
 	if (&rhs < &lhs)
 		return (lhs);
-	return (lhs);
+	return (rhs);
 }
