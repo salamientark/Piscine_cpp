@@ -6,7 +6,7 @@
 /*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:04:42 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/28 21:22:27 by madlab           ###   ########.fr       */
+/*   Updated: 2024/07/29 06:51:34 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ Fixed::Fixed( const float nbr )
 {
 	std::cout << "Float constructor called" << std::endl;
 	if (nbr < 0)
-		this->_nbr = round(nbr * (1 << Fixed::_fractBitNbr));
+		this->_nbr = roundf(nbr * (1 << Fixed::_fractBitNbr));
 	else
-		this->_nbr = (((int)round(-nbr * (1 << Fixed::_fractBitNbr))) ^ 0xFFFFFFFF) + 1;	 
+		this->_nbr = (((int)roundf(-nbr * (1 << Fixed::_fractBitNbr))) ^ 0xFFFFFFFF) + 1;	 
 
 	return ;
 }
