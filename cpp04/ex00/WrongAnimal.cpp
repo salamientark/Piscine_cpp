@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:16:44 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 15:19:19 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:41:28 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ std::string	WrongAnimal::getType( void ) const
 /* ************************************************************************** */
 WrongAnimal& WrongAnimal::operator=( WrongAnimal const & rhs )
 {
+	std::cout << "Called WrongAnimal assignment operator" << std::endl;
 	this->type = rhs.getType();
 	return (*this);
 }

@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:35:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 15:08:34 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:39:33 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ std::string	Animal::getType( void ) const
 /* ************************************************************************** */
 Animal& Animal::operator=( Animal const & rhs )
 {
+	std::cout << "Called Animal assignment operator" << std::endl;
 	this->type = rhs.getType();
 	return (*this);
 }
