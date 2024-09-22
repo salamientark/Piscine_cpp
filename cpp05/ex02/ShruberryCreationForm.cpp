@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:59:28 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 21:23:51 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:29:14 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,7 @@ void					ShruberryCreationForm::execute( const Bureaucrat& executor ) const
 	try
 	{
 		AForm::execute(executor);
-		// if (this->getSigned() == 0)
-		// 	throw (AForm::FormNotSignedException());
-		// if (this->getExecGrade() < executor->getGrade())
-		// 	throw (AForm::ExecGradeTooLowException());
-		ofs.open(this->_target.c_str(), std::ios_base::trunc);
+		ofs.open(std::string(this->_target + "_shruberry").c_str(), std::ios_base::trunc);
 		if (!ofs.is_open())
 			throw (std::exception());
 		ofs << std::string(ASCII_TREE) << std::endl;

@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:56:34 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 21:02:19 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:30:35 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 # define NAME_SHRUBERRY "shruberry"
 # define SIGN_SHRUBERRY 145
 # define EXEC_SHRUBERRY 137
-# define ASCII_TREE "\
-       _-_\
-    /~~   ~~\\\
- /~~         ~~\\
-\{               }\
- \\  _-     -_  /\
-   ~  \\\\ //  ~\
-_- -   | | _- _\
-  _ -  | |   -_\
-      // \\\\\
+# define ASCII_TREE "\n\
+       _-_\n\
+    /~~   ~~\\\n\
+ /~~         ~~\\\n\
+\{               }\n\
+ \\  _-     -_  /\n\
+   ~  \\\\ //  ~\n\
+_- -   | | _- _\n\
+  _ -  | |   -_\n\
+      // \\\\\n\
 "
 
 # include <fstream>
