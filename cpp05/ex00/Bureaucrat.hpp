@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 19:42:27 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 07:43:01 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/22 12:18:09 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 # include <string>
 
 class Bureaucrat {
-	class GradeTooHighException : public std::exception {
-		public :
-			virtual const char*	what() const throw();
-	};
-
-	class GradeTooLowException : public std::exception {
-		public :
-			virtual const char*	what() const throw();
-	};
-
 	public:
+		class GradeTooHighException : public std::exception {
+			public :
+				virtual const char*	what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception {
+			public :
+				virtual const char*	what() const throw();
+		};
+
 		Bureaucrat( void );	// Canonical Form
 		Bureaucrat( Bureaucrat const & rhs ); // Canonical Form
 		Bureaucrat( std::string name, int grade );
@@ -40,8 +40,8 @@ class Bureaucrat {
 		std::string const	getName( void ) const;
 		int					getGrade( void ) const;
 
-		void	incrementGrade( void ) throw();
-		void	decrementGrade( void ) throw();
+		void	incrementGrade( void );
+		void	decrementGrade( void );
 
 	private:
 		std::string const	_name;

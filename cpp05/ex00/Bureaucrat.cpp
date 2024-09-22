@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:35:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 08:07:21 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/22 12:18:16 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,24 @@ Bureaucrat::Bureaucrat( Bureaucrat const & rhs )
 	return ;
 }
 
-Bureaucrat::Bureaucrat( std::string name ,int grade ) : _name(name)
+Bureaucrat::Bureaucrat( std::string name ,int grade )
+	: _name(name), _grade(grade)
 {
-	try {
 		if (grade < 1)
 			throw (Bureaucrat::GradeTooHighException());
 		if (grade > 150)
 			throw (Bureaucrat::GradeTooLowException());
 		this->_grade = grade;
-	}
-	catch (Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << grade << " : " << e.what() << std::endl;
-		this->_grade = 1;
-	}
-	catch (Bureaucrat::GradeTooLowException& e)
-	{
-		std::cout << grade << " : " << e.what() << std::endl;
-		this->_grade = 150;
-	}
+	// catch (Bureaucrat::GradeTooHighException& e)
+	// {
+	// 	std::cout << grade << " : " << e.what() << std::endl;
+	// 	this->_grade = 1;
+	// }
+	// catch (Bureaucrat::GradeTooLowException& e)
+	// {
+	// 	std::cout << grade << " : " << e.what() << std::endl;
+	// 	this->_grade = 150;
+	// }
 	return ;
 }
 
@@ -95,34 +94,18 @@ std::ostream&	operator<<( std::ostream& os, const Bureaucrat& rhs)
 /* ************************************************************************** */
 /*                             Public Member Function                         */
 /* ************************************************************************** */
-void	Bureaucrat::incrementGrade( void ) throw()
+void	Bureaucrat::incrementGrade( void )
 {
-	try
-	{
-		if (this->_grade <= 1)
-			throw (Bureaucrat::GradeTooHighException());
-		this->_grade--;
-		return ;
-	}
-	catch(Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << this->_grade << " - 1 : " << e.what() << std::endl;
-		return ;
-	}
+	if (this->_grade <= 1)
+		throw (Bureaucrat::GradeTooHighException());
+	this->_grade--;
+	return ;
 }
 
-void	Bureaucrat::decrementGrade( void ) throw()
+void	Bureaucrat::decrementGrade( void )
 {
-	try
-	{
-		if (this->_grade >= 150)
-			throw (Bureaucrat::GradeTooLowException());
-		this->_grade++;
-		return ;
-	}
-	catch(Bureaucrat::GradeTooLowException& e)
-	{
-		std::cout << this->_grade << " + 1 : " << e.what() << std::endl;
-		return ;
-	}
+	if (this->_grade >= 150)
+		throw (Bureaucrat::GradeTooLowException());
+	this->_grade++;
+	return ;
 }
