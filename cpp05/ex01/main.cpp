@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:16:54 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 13:25:50 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/22 18:12:20 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main( void )
 
 		std::cout << "*** THIS LINE SHOULD NOT APPEAR ***" << std::endl;
 	}
-	catch (Form::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -83,7 +83,7 @@ int	main( void )
 
 		std::cout << "*** THIS LINE SHOULD NOT APPEAR ***" << std::endl;
 	}
-	catch (Form::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -96,7 +96,7 @@ int	main( void )
 
 		std::cout << "*** THIS LINE SHOULD NOT APPEAR ***" << std::endl;
 	}
-	catch (Form::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -113,7 +113,7 @@ int	main( void )
 	{
 		std::cout << e.what() << std::endl;
 	}
-	catch (Form::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -134,7 +134,7 @@ int	main( void )
 
 		std::cout << "*** THIS LINE SHOULD NOT APPEAR ***" << std::endl;
 	}
-	catch  (Form::GradeTooLowException& e)
+	catch  (std::exception& e)
 	{
 		std::cout << "Beber couldn't make it " << e.what() << std::endl;
 	}
@@ -145,17 +145,17 @@ int	main( void )
 	try
 	{
 		std::cout << std::endl << "Try invalid signForm" << std::endl;
-		Bureaucrat beber = Bureaucrat("beber", 149);
+		Bureaucrat beber = Bureaucrat("beber", 148);
 		Form		vaz_y_beber_signe = Form("vaz_y_beber_signe", 148, 148);
 
 		std::cout << beber << std::endl
 			<< vaz_y_beber_signe << std::endl;
 		std::cout << "> Beber will try again to sign form" << std::endl;
 		beber.signForm(vaz_y_beber_signe);
+		beber.signForm(vaz_y_beber_signe);
 		
-		std::cout << "*** THIS LINE SHOULD NOT APPEAR ***" << std::endl;
 	}
-	catch  (Form::GradeTooLowException& e)
+	catch  (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
