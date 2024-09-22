@@ -6,12 +6,13 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:35:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 18:19:39 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:14:36 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include <iostream>
+#include "AForm.hpp"
+#include <exception>
 
 const	char*	Bureaucrat::GradeTooHighException::what() const throw()
 {
@@ -100,20 +101,36 @@ void	Bureaucrat::decrementGrade( void )
 	return ;
 }
 
-void	Bureaucrat::signForm( Form& form ) const
+void	Bureaucrat::signForm( AForm& form ) const
 {
-		if (form.getSigned() == 1)
-		{		
-			std::cout << this->_name << " couldn't sign " << form.getName()
-				<< " because it's already signed" << std::endl;
-			return ;
-		}
-		if (form.getSignGrade() < this->getGrade())
-		{
-			std::cout << this->_name << " couldn't sign " << form.getName()
-				<< " because ";
-			throw (Form::GradeTooLowException());
-		}
-		form.beSigned(*this);
-		std::cout << this->_name << " signed " << form.getName() << std::endl;
+	if (form.getSigned() == 1)
+	{
+		std::cout << this->_name << " couldn't sign " << form.getName()
+			<< " because it's already signed" << std::endl;
+		return ;
+	}
+	if (form.getSignGrade() < this->getGrade())
+	{
+		std::cout << this->_name << " couldn't sign " << form.getName()
+			<< " because ";
+		throw(AForm::GradeTooLowException());
+	}
+	form.beSigned(*this);
+	std::cout << this->_name << " signed " << form.getName() << std::endl;
+}
+
+void	Bureaucrat::executeForm( const AForm& form )
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << this->getName() << " executed " << form.getName() << std::endl;
+	}
+	// catch (AForm::ExecGradeTooLowException& e)
+	catch (std::exception& e)
+	{
+		std::cerr << this->getName() << " couldn't execute " << form.getName()
+			<< " because " << e.what();
+		throw (e);
+	}
 }
