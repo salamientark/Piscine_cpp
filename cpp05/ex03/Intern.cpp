@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:32:12 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/23 09:22:56 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:48:36 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShruberryCreationForm.hpp"
 
-const std::string	Intern::_form_name_[3] = {"shrubberry creation",
-	"robotomy request", "presidential pardon"};
 
 
 /* ************************************************************************** */
@@ -48,9 +46,9 @@ Intern::~Intern( void )
 /* ************************************************************************** */
 Intern&	Intern::operator=( Intern const & rhs )
 {
+	(void) rhs;
 	if (this == &rhs)
 		return (*this);
-	*this = rhs;
 	return (*this);
 }
 
@@ -98,13 +96,21 @@ AForm*	Intern::makePresidentialForm( std::string target ) const
 
 AForm*	Intern::makeForm( std::string name, std::string target )
 {
+	AForm* res;
+
+	const std::string	_form_name_[3] = {"shruberry creation",
+		"robotomy request", "presidential pardon"};
+
 	AForm* (Intern::*_form_func_[3])(std::string target) const =
 		{&Intern::makeShruberryForm, &Intern::makeRobotomyForm,
 			&Intern::makePresidentialForm };
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		if (name.compare(Intern::_form_name_[i]) == 0)
-			return ((this->*_form_func_[i])(target));
+		if (name.compare(_form_name_[i]) == 0){
+			res = ((this->*_form_func_[i])(target));
+			std::cout << "Intern creates " << *res << std::endl;
+			return (res);
+		}
 	}
 	std::cerr << "Unknow formtype name : " << name << std::endl;
 	return (NULL);

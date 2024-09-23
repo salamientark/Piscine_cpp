@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:35:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 21:14:36 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:50:44 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	Bureaucrat::signForm( AForm& form ) const
 	if (form.getSignGrade() < this->getGrade())
 	{
 		std::cout << this->_name << " couldn't sign " << form.getName()
-			<< " because ";
+			<< " because AForm::grade too low.";
 		throw(AForm::GradeTooLowException());
 	}
 	form.beSigned(*this);
