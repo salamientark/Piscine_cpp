@@ -1,6 +1,6 @@
 ### COMPILATION ###
 CPP = c++
-CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
+CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -g3
 
 ### INCLUDES ###
 PROJECT = convert
@@ -8,6 +8,7 @@ PROJECT_DIR = ./
 
 SRC_DIR = ./
 SRC_FILE = ScalarClass.cpp \
+		   convert.cpp \
 		   main.cpp
 			   
 ### HEADER FILE ###
