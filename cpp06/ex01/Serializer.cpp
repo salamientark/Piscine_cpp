@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarClass.cpp                                    :+:      :+:    :+:   */
+/*   Serializer.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 14:35:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/24 12:31:25 by dbaladro         ###   ########.fr       */
+/*   Created: 2024/09/24 12:30:47 by dbaladro          #+#    #+#             */
+/*   Updated: 2024/09/24 12:47:45 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarClass.hpp"
-
-const char*	ScalarClass::InvalidParameterException::what( void ) const throw()
-{
-	return ("Parameter is neither a char or int or float or double");
-}
+#include "Serializer.hpp"
 
 /* ************************************************************************** */
 /*                           Constructor and Destructors                      */
 /* ************************************************************************** */
-ScalarClass::ScalarClass( void )
+Serializer::Serializer( void )
 {
 	return ;
 }
 
-ScalarClass::ScalarClass( ScalarClass const & rhs )
+Serializer::Serializer( Serializer const & rhs )
 {
 	(void) rhs;
 	return ;
 }
 
-ScalarClass::~ScalarClass( void )
+Serializer::~Serializer( void )
 {
 	return ;
 }
@@ -43,13 +38,21 @@ ScalarClass::~ScalarClass( void )
 /* ************************************************************************** */
 /*                                Operator Overload                           */
 /* ************************************************************************** */
-ScalarClass& ScalarClass::operator=( ScalarClass const & rhs )
+Serializer& Serializer::operator=( Serializer const & rhs )
 {
 	(void) rhs;
 	return (*this);
 }
 
-
 /* ************************************************************************** */
 /*                             Public Member Function                         */
 /* ************************************************************************** */
+uintptr_t	Serializer::serialize( Data* ptr )
+{
+	return (reinterpret_cast<uintptr_t>(ptr));
+}
+
+Data*		Serializer::deserialize( uintptr_t raw )
+{
+	return (reinterpret_cast<Data*>(raw));
+}
