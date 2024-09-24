@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 19:42:27 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/23 20:18:36 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:03:20 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <iostream>
 # include <string>
 # include <exception>
+# include <stdexcept>
+# include <sstream>
+# include <iomanip>
+# include <cmath>
+		
 
 class ScalarClass {
 	public:

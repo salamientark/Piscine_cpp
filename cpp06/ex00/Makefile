@@ -1,9 +1,9 @@
 ### COMPILATION ###
 CPP = c++
-CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -g3
+CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 ### INCLUDES ###
-PROJECT = a.out 
+PROJECT = convert
 PROJECT_DIR = ./
 
 SRC_DIR = ./
