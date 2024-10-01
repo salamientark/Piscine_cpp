@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:45:02 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/01 10:45:48 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/01 18:53:32 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 
 class BitcoinExchange {
 public:
+	class InitDBException : public std::exception {
+		virtual const char* what() const throw();
+	};
 	class BadFileException : public std::exception {
 		public :
 			virtual const char*	what() const throw();
@@ -32,19 +35,38 @@ public:
 		public :
 			virtual const char	*what() const throw();
 	};
+	class DateTooEarlyException : public std::exception {
+		public :
+			virtual const char*	what() const throw();
+	};
+	class TooLargeNbrException : public std::exception {
+		public :
+			virtual const char* what() const throw();
+	};
+	class NegativeNbrException : public std::exception {
+		public :
+			virtual const char* what() const throw();
+	};
+	class TryingToPredictFuturException : public std::exception {
+		public :
+			virtual const char* what() const throw();
+	};
+
 	BitcoinExchange( void );
 	BitcoinExchange( BitcoinExchange const & rhs );
 	BitcoinExchange( const std::string& filename );
 	~BitcoinExchange();
 
-	BitcoinExchange& operator=( BitcoinExchange const & rhs );
+	BitcoinExchange&		operator=( BitcoinExchange const & rhs );
 
 	std::map<Date, double>	getDatabase( void ) const;
+	void					compare(const std::string& filename) const;
 
 private:
 	std::map<Date, double>	_database;
 
 	std::map<Date, double>	_init( const std::string& filename );
+	bool					_valid_date(const Date& date) const;
 
 };
 

@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:01:10 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/01 09:34:02 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/01 18:46:45 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string>
 # include <cstdlib>
 # include <sstream>
+# include <ctime>
 
 class Date {
 public:
@@ -39,6 +40,9 @@ public:
 	int		getYear( void ) const;
 	int		getMonth( void ) const;
 	int		getDay( void ) const;
+
+	bool	is_valid( void ) const;
+	bool	is_in_futur( void ) const;
 
 private:
 	int	_year;
