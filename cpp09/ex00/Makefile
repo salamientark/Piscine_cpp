@@ -3,7 +3,7 @@ CPP = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -g3
 
 ### INCLUDES ###
-PROJECT = a.out
+PROJECT = btc
 PROJECT_DIR = ./
 
 SRC_DIR = ./
