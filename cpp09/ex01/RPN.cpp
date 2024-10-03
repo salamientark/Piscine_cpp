@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:34:49 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/03 10:37:04 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:40:32 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ double	RPN::calculate( const std::string& expr ) {
 		word_begin++;
 	pos = expr.find_first_of(delimiter, word_begin);
 	while (word_begin != std::string::npos) {
-	// do {
 		if (pos != word_begin) {
 			tmp = expr.substr(word_begin, pos - word_begin);
 			if (is_operator(tmp))
@@ -144,7 +143,6 @@ double	RPN::calculate( const std::string& expr ) {
 			word_begin = pos + 1;
 		pos = expr.find_first_of(delimiter, word_begin);
 	}
-	// } while (pos != std::string::npos);
 	if (this->_stack.size() != 1)
 		throw (RPN::InvalidExpressionException());
 	return (this->_stack.top());
