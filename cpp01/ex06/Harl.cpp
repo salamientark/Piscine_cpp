@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madlab <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 23:44:44 by madlab            #+#    #+#             */
-/*   Updated: 2024/07/28 10:04:34 by madlab           ###   ########.fr       */
+/*   Updated: 2024/10/07 16:43:48 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,18 @@ void	Harl::debug( void ) const
 {
 	std::cout << "[ DEBUG ]" << std::endl;
 	std::cout << "please don't use a standard debug message for debugging" << std::endl;
-	this->info();
 }
 
 void	Harl::info( void ) const
 {
 	std::cout << "[ INFO ]" << std::endl;
 	std::cout << "This message is very informative" << std::endl;
-	this->warning();
 }
 
 void	Harl::warning( void ) const
 {
 	std::cout << "[ WARNING ]" << std::endl;
 	std::cout << "Be carreful !" << std::endl;
-	this->error();
 }
 
 void	Harl::error( void ) const
@@ -72,16 +69,13 @@ void Harl::complain( std::string level ) const
 	switch (this->getLevelValue(level)) {
 		case 0:
 			this->debug();
-			break ;
 		case 1:
 			this->info();
-			break ;
 		case 2:
 			this->warning();
-			break ;
 		case 3:
 			this->error();
-			break;
+			break ;
 		default:
 			std::cout << DEFAULT_MSG << std::endl;
 			break;
