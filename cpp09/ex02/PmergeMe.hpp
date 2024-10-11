@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:20 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/03 12:05:56 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/11 12:48:13 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ public:
 	PmergeMe( PmergeMe const & rhs );
 	~PmergeMe();
 
-	PmergeMe& operator=( PmergeMe const & rhs );
+	PmergeMe&		operator=( PmergeMe const & rhs );
 
 	std::deque<int>	getToSort( void ) const;
 	std::list<int>	getSorted( void ) const;
 
-	void			addDeque(const int& ac, char *av[]);
+	void			init(const int& ac, char *av[]);
+
+	template< typename T >
+	void			sort(T& to_sort, int depth);
+	void			sort( void );
 
 private:
 	std::deque<int>	_to_sort;
@@ -45,7 +49,9 @@ private:
 	
 };
 
-std::ostream&	operator<<(std::ostream& os, std::deque<int> rhs);
-std::ostream&	operator<<(std::ostream& os, std::list<int> rhs);
+/* ************************************************************************** */
+/*                                  Printer                                   */
+/* ************************************************************************** */
+std::ostream&	operator<<(std::ostream& os, PmergeMe& rhs);
 
 #endif // !PMERGEME_HPP
