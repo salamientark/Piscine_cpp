@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:20 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/11 22:49:34 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/17 11:30:43 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <deque>
 # include <vector>
 # include <list>
+# include <cmath>
 
 class InvalidInputException : public std::exception {
 	public :
