@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:49 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/17 23:16:04 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:38:53 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ void	insert(std::vector<int>& v, int depth) {
 	it = v.begin() + 3 * step - 1; // go to third element directly
 	while (static_cast<long unsigned int>(std::distance(v.begin(), it)) < v.size()) {
 
-		std::copy(it - step / 2, it + 1, tmp.begin()); // Save vector to insert
 	
 		// set it to the first element to insert 
 		count = 0;
-		for (it = it; std::distance(v.begin(), it) > std::distance(v.begin(), v.begin() + jacobsthal[i] * step); it -= 2 * step) {
+		for (std::vector<int>::iterator j = it; std::distance(v.begin(), j) > std::distance(v.begin(), v.begin() + jacobsthal[i] * step); j -= 2 * step + count) {
+
+			std::copy(j - step / 2, j + 1, tmp.begin()); // Save vector to insert
 
 			// Perform binary search
 			pos = v.begin() + (jacobsthal[i] + 0.5 * count) * step / 2; // Set to the middlw in array FALSE
@@ -72,12 +73,12 @@ void	insert(std::vector<int>& v, int depth) {
 				}
 				break ;
 			} while (pos != v.begin());
-			if (*pos < *it)
+			if (*pos < *j)
 				pos += step;
 
 			// move
-			if (pos != it) {
-				std::copy_backward(pos - step + 1, it - step + 1, it + 1);
+			if (pos != j) {
+				std::copy_backward(pos - step + 1, j - step + 1, j + 1);
 				std::copy(tmp.begin(), tmp.end(), pos - step + 1);
 			}
 
@@ -94,11 +95,17 @@ void	insert(std::vector<int>& v, int depth) {
 		// Finished part of insertion following jacosthal
 		i++;
 
+		for (int a = jacobsthal[i + 1] - jacobsthal[i]; a > 0; --a) {
+			it += 2 * step;
+			if (std::distance(v.begin(), it) >= static_cast<long int>(v.size())) {
+				break ;
+			}
+		}
 		// REWORK THIS PART
-		if (std::distance(v.begin(), v.begin() + jacobsthal[i] * step) >= static_cast<long int>(v.size()))
-			break ;
-		it = std::distance(v.begin(), v.begin() + jacobsthal[i + 1] * step) < static_cast<long int>(v.size())
-			? v.begin() + jacobsthal[i + 1] * step - 1 : v.begin() + v.size() - step;
+		// if (std::distance(v.begin(), v.begin() + jacobsthal[i] * step) >= static_cast<long int>(v.size()))
+		// 	break ;
+		// it = std::distance(v.begin(), v.begin() + jacobsthal[i + 1] * step) < static_cast<long int>(v.size())
+		// 	? v.begin() + jacobsthal[i + 1] * step - 1 : v.begin() + v.size() - step;
 	}
 
 }
