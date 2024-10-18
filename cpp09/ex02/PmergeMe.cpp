@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:49 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/18 17:57:47 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/18 23:49:30 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,19 @@ const char*	InvalidInputException::what() const throw() {
 void new_insert(std::vector<int>& v, int depth) {
 	// Perform insertion part
 	// define first 32 jacobstahl term
-	// static const int	jacobsthal[32] = { 0, 1, 3, 5, 11, 21, 43, 85, 171, 341,
-	// 	683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525, 
-	// 	699051, 1398101, 2796203, 5592405, 11184811, 22369621, 44739243,
-	// 	89478485, 178956971, 357913941, 715827883, 1431655765};
+	static const int	jacobsthal[32] = { 0, 1, 3, 5, 11, 21, 43, 85, 171, 341,
+		683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525, 
+		699051, 1398101, 2796203, 5592405, 11184811, 22369621, 44739243,
+		89478485, 178956971, 357913941, 715827883, 1431655765};
 
 	unsigned long int	step = (1 << depth);	// define iterator step
-	// int	jacob_idx = 1; // Jacobsthal index
-	// int	diff;			// Jacobstahal diff
+	int	jacob_idx = 1; // Jacobsthal index
+	int	diff;			// Jacobstahal diff
 
 	std::vector<int>::iterator	d_lim, h_lim, pos; // binary search variable
 	std::vector<int>::iterator	v_it, res_it, to_insert_it, end, a; // vector iterator
-	std::vector<int>			res(v.size()), to_insert(v.size() / 2); // tmp vector when inserting
+	// std::vector<int>			res(v.size()), to_insert(v.size() / 2); // tmp vector when inserting
+	std::vector<int>			res(v.size()), to_insert(std::ceil(((v.size() - 2 * step) /  step) / 2.0) * step);
 
 	// Fill the res and to insert vector
 	std::copy(v.begin(), v.begin() + 2 * step, res.begin());
@@ -53,27 +54,87 @@ void new_insert(std::vector<int>& v, int depth) {
 	res_it = res.begin() + 2 * step;
 	to_insert_it = to_insert.begin();
 	while (v_it != v.end()) {
-		if (v_it + step > v.end()) {
-			// std::copy(v_it, v.end(), to_insert_it);
+		if (v_it + step > v.end())
 			break ;
-		}
 		std::copy(v_it, v_it + step, to_insert_it);
 		to_insert_it += step;
 		v_it += step;
-		if (v_it + step > v.end()) {
-			// std::copy(v_it, v.end(), res_it);
+		if (v_it + step > v.end())
 			break ;
-		}
 		std::copy(v_it, v_it + step, res_it);
 		res_it += step;
 		v_it += step;
 	}
 	// Finished copy Lets insert
+
+	// INSERT
+	pos = to_insert.begin() + jacobsthal[jacob_idx] * step - 1; // Set to first pair to insert
 	
+	while (std::distance(to_insert.begin(), pos) < static_cast<long int>(v.size())) {
+	// while (std::distance(to_insert.begin(), to_insert.begin() + jacobsthal[jacob_idx] * step) < static_cast<long int>(v.size())) {
+	
+		// Perform insertion following jacobsthal order
+		diff = 0;
+		for (pos = pos; pos >= to_insert.begin() + jacobsthal[jacob_idx - 1] * step; pos -= step) {
+
+			// Prepare For binary search
+			d_lim = res.begin() + step - 1; // Set down limit
+			h_lim = res.end() - 1 - (to_insert.size() - (pos - to_insert.begin())) * step;
+			// h_lim = res.begin() + 2 * step - 1 + ((v.size() - 2 * step) / 2) / step + diff;
+
+			res_it = d_lim + (std::distance(d_lim, h_lim) / step) / 2;
+			// res_it = res.begin() + std::ceil((std::distance(d_lim, h_lim) / step) / 2);
+			// if (std::distance(d_lim, h_lim) == static_cast<long int>(step))
+			// 	res_it = d_lim;
+			do {
+				if (*pos < *res_it) {
+					h_lim = res_it;
+					res_it -= std::ceil((std::distance(d_lim, h_lim) / step) / 2.0);
+					if (res_it < d_lim) {
+						res_it = d_lim;
+						break ;
+					}
+					continue;
+				}
+				if (*pos > *(res_it + step)) {
+					d_lim = res_it;
+					if (res_it + step == h_lim)
+						res_it = h_lim;
+					else
+						res_it += std::ceil((std::distance(d_lim, h_lim) / step) / 2);
+					// res_it += std::ceil(std::distance(d_lim, h_lim) / 2.0) * step;
+					if (res_it >= h_lim) {
+						res_it = h_lim;
+						break ;
+					}
+					continue;
+				}
+				break ;
+			} while ( std::distance(d_lim, h_lim) / step > 1 );
+			// if (res_it != h_lim && *pos > *res_it)
+			if (*pos > *res_it)
+				res_it += step;
+
+			// std::copy_backward(res_it, res.end() - (res_it - res.begin()), res.end()); // Move element
+			std::copy_backward(res_it + 1 - step, res.end() - step, res.end()); // Move element
+			std::copy(pos + 1 - step, pos + 1, res_it - step + 1);
+
+			diff++;
+		}
+		jacob_idx++;
+		// SIZE CHECK IS FALSE BECAUS EWE ALLOCATED TO MUCH
+		if (std::distance(to_insert.begin(), to_insert.begin() + jacobsthal[jacob_idx - 1] * step - 1) >= static_cast<long int>(to_insert.size()))
+		// if (std::distance(to_insert.begin(), to_insert.begin() + (jacobsthal[jacob_idx - 1] + 1) * step - 1) >= static_cast<long int>(to_insert.size()))
+			break ;
+
+		pos = std::min(to_insert.end() - 1, to_insert.begin() + jacobsthal[jacob_idx] * step - 1);
+
+	}
 	// Add uninserted part if one
 	if (v.size() % (2 * step) != 0) {
 		std::copy(v.end() - (v.size() % step), v.end(), res.end() - (v.size() % step));
 	}
+	v = res;
 	return ;
 }
 
@@ -113,8 +174,7 @@ void	insert(std::vector<int>& v, int depth) {
 			// h_lim = j;
 			h_lim = j;
 
-			pos = v.begin() + (((std::distance(v.begin(), h_lim) / step) + 1) / 2 ) * step + step - 1;
-			do {
+			pos = v.begin() + (((std::distance(v.begin(), h_lim) / step) + 1) / 2 ) * step + step - 1; do {
 				if (*tmp.rbegin() < *pos) {
 					h_lim = pos;
 					// pos -= std::ceil(std::distance(d_lim, h_lim) / 2.0) * step;
