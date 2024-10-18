@@ -6,12 +6,13 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:49 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/17 23:38:53 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/18 10:50:23 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include <algorithm>
+#include <cmath>
 #include <iterator>
 #include <ostream>
 #include <sstream>
@@ -38,37 +39,53 @@ void	insert(std::vector<int>& v, int depth) {
 		89478485, 178956971, 357913941, 715827883, 1431655765};
 
 	int	step = (1 << depth);	// define iterator step
-	std::vector<int>::iterator	it, pos, end;
+	int	jacob_idx = 1; // Jacobsthal index
+	int	diff;			// Jacobstahal diff
+
+	std::vector<int>::iterator	d_lim, h_lim, pos; // binary search variable
+	std::vector<int>::iterator	it, end, a; // vector iterator
 	std::vector<int>			tmp(step); // tmp vector when inserting
-	int	i = 1; // Jacobsthal index
-	int	count;
 
 	// This keep the vector of size two by trying to go to the third element
 	it = v.begin() + 3 * step - 1; // go to third element directly
+
 	while (static_cast<long unsigned int>(std::distance(v.begin(), it)) < v.size()) {
 
 	
 		// set it to the first element to insert 
-		count = 0;
-		for (std::vector<int>::iterator j = it; std::distance(v.begin(), j) > std::distance(v.begin(), v.begin() + jacobsthal[i] * step); j -= 2 * step + count) {
+		diff = 0;
+		for (std::vector<int>::iterator j = it; std::distance(v.begin(), j) > std::distance(v.begin(), v.begin() + jacobsthal[jacob_idx]  * step + step - 1); j -= 2 * step) {
 
 			std::copy(j - step / 2, j + 1, tmp.begin()); // Save vector to insert
 
 			// Perform binary search
-			pos = v.begin() + (jacobsthal[i] + 0.5 * count) * step / 2; // Set to the middlw in array FALSE
+			d_lim = v.begin(); // set down limit
+
+			h_lim = j;
+			// h_lim = std::min(j, v.begin() + jacobsthal[jacob_idx] * 2 * step);
+
+			// pos = v.begin() + (jacobsthal[jacob_idx] + 0.5 * diff) * step / 2; // Set to the middlw in array FALSE
+			// pos = v.begin() + std::ceil((jacobsthal[jacob_idx - 1] * 2 * step + step + diff) / 2);
+			// pos = v.begin() + std::distance(v.begin(), h_lim) / 2;
+			pos = v.begin() + (((std::distance(v.begin(), h_lim) / step) + 1) / 2 ) * step + step - 1;
 			// while (pos != v.begin()) {
 			do {
 				if (*tmp.rbegin() < *pos) {
-					pos -= std::ceil(std::distance(v.begin(), pos) / 2.0) * step;
-					if (std::distance(v.begin(), pos) < step - 1) {
-						pos = v.begin() + step - 1;
+					h_lim = pos;
+					pos -= std::ceil(std::distance(d_lim, h_lim) / 2.0) * step;
+					if (std::distance(d_lim, pos) < step - 1) {
+						pos = d_lim + step - 1;
 						break ;
 					}
-					// pos -= std::ceil(std::distance(v.begin(), pos) / 2.0) * step;
 					continue;
 				}
 				if (*tmp.rbegin() > *(pos + step)) {
-					pos += std::ceil((std::distance(v.begin(), pos) + 1) / 2.0) * step;
+					d_lim = pos;
+					pos += std::ceil((std::distance(d_lim, h_lim) + 1) / 2.0) * step;
+					if (pos > h_lim) {
+						pos = h_lim;
+						break ;
+					}
 					continue;
 				}
 				break ;
@@ -83,7 +100,8 @@ void	insert(std::vector<int>& v, int depth) {
 			}
 
 			// insert
-			count++;
+			diff++;
+			j += (pos < j - 1);
 
 			// for (std::vector<int>::const_iterator it = v.begin(); it != v.end(); ++it) {
 			// 	std::cout << *it;
@@ -93,19 +111,20 @@ void	insert(std::vector<int>& v, int depth) {
 			// std::cout << std::endl;
 		}
 		// Finished part of insertion following jacosthal
-		i++;
+		it = v.begin() + jacobsthal[jacob_idx] * 2 * step;
+		jacob_idx++;
 
-		for (int a = jacobsthal[i + 1] - jacobsthal[i]; a > 0; --a) {
+		for (int a = jacobsthal[jacob_idx] - jacobsthal[jacob_idx - 1]; a > 0; --a) {
 			it += 2 * step;
 			if (std::distance(v.begin(), it) >= static_cast<long int>(v.size())) {
 				break ;
 			}
 		}
 		// REWORK THIS PART
-		// if (std::distance(v.begin(), v.begin() + jacobsthal[i] * step) >= static_cast<long int>(v.size()))
+		// if (std::distance(v.begin(), v.begin() + jacobsthal[jacob_idx] * step) >= static_cast<long int>(v.size()))
 		// 	break ;
-		// it = std::distance(v.begin(), v.begin() + jacobsthal[i + 1] * step) < static_cast<long int>(v.size())
-		// 	? v.begin() + jacobsthal[i + 1] * step - 1 : v.begin() + v.size() - step;
+		// it = std::distance(v.begin(), v.begin() + jacobsthal[jacob_idx + 1] * step) < static_cast<long int>(v.size())
+		// 	? v.begin() + jacobsthal[jacob_idx + 1] * step - 1 : v.begin() + v.size() - step;
 	}
 
 }
