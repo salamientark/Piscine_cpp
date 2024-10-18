@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:49 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/18 12:19:14 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:22:25 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,19 @@ void	insert(std::vector<int>& v, int depth) {
 
 			// insert
 			diff++;
-			j += (pos < j - 1);
+			j += (pos < j - 1) * step;
 		}
 		// Finished part of insertion following jacosthal
-		it = v.begin() + (jacobsthal[jacob_idx] + 1) * 2 * step + step - 1;
-		if (std::distance(v.begin(), it) >= static_cast<long int>(v.size()))
+		it = v.begin() + (jacobsthal[jacob_idx]) * 2 * step  + step - 1;
+
+		if (std::distance(v.begin(), it + step) >= static_cast<long int>(v.size()))
 			break ;
 		jacob_idx++;
 
 		for (int a = jacobsthal[jacob_idx] - jacobsthal[jacob_idx - 1]; a > 0; --a) {
-			if (std::distance(v.begin(), it + 2 * step) >= static_cast<long int>(v.size())) {
+			if (std::distance(v.begin(), it + 2 * step) >= static_cast<long int>(v.size()))
 				break ;
 			it += 2 * step;
-			}
 		}
 	}
 
