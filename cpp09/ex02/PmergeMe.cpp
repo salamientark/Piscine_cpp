@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:49 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/18 15:22:25 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:57:47 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,53 @@ const char*	InvalidInputException::what() const throw() {
 /* ************************************************************************** */
 /*                             Public Member Function                         */
 /* ************************************************************************** */
+
+
+void new_insert(std::vector<int>& v, int depth) {
+	// Perform insertion part
+	// define first 32 jacobstahl term
+	// static const int	jacobsthal[32] = { 0, 1, 3, 5, 11, 21, 43, 85, 171, 341,
+	// 	683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525, 
+	// 	699051, 1398101, 2796203, 5592405, 11184811, 22369621, 44739243,
+	// 	89478485, 178956971, 357913941, 715827883, 1431655765};
+
+	unsigned long int	step = (1 << depth);	// define iterator step
+	// int	jacob_idx = 1; // Jacobsthal index
+	// int	diff;			// Jacobstahal diff
+
+	std::vector<int>::iterator	d_lim, h_lim, pos; // binary search variable
+	std::vector<int>::iterator	v_it, res_it, to_insert_it, end, a; // vector iterator
+	std::vector<int>			res(v.size()), to_insert(v.size() / 2); // tmp vector when inserting
+
+	// Fill the res and to insert vector
+	std::copy(v.begin(), v.begin() + 2 * step, res.begin());
+	v_it = v.begin() + 2 * step;
+	res_it = res.begin() + 2 * step;
+	to_insert_it = to_insert.begin();
+	while (v_it != v.end()) {
+		if (v_it + step > v.end()) {
+			// std::copy(v_it, v.end(), to_insert_it);
+			break ;
+		}
+		std::copy(v_it, v_it + step, to_insert_it);
+		to_insert_it += step;
+		v_it += step;
+		if (v_it + step > v.end()) {
+			// std::copy(v_it, v.end(), res_it);
+			break ;
+		}
+		std::copy(v_it, v_it + step, res_it);
+		res_it += step;
+		v_it += step;
+	}
+	// Finished copy Lets insert
+	
+	// Add uninserted part if one
+	if (v.size() % (2 * step) != 0) {
+		std::copy(v.end() - (v.size() % step), v.end(), res.end() - (v.size() % step));
+	}
+	return ;
+}
 
 void	insert(std::vector<int>& v, int depth) {
 	// Perform insertion part
@@ -54,13 +101,16 @@ void	insert(std::vector<int>& v, int depth) {
 	
 		// set it to the first element to insert 
 		diff = 0;
-		for (std::vector<int>::iterator j = it; std::distance(v.begin(), j) > std::distance(v.begin(), v.begin() + jacobsthal[jacob_idx]  * step + step - 1); j -= 2 * step) {
+		while (it - diff > v.begin() + jacobsthal[jacob_idx] * step + step - 1) {
+		// for (std::vector<int>::iterator j = it; std::distance(v.begin(), j) > std::distance(v.begin(), v.begin() + jacobsthal[jacob_idx]  * step + step - 1); j -= 2 * step) {
+			std::vector<int>::iterator	j = it - diff;
 
 			std::copy(j - step / 2, j + 1, tmp.begin()); // Save vector to insert
 
 			// Perform binary search
 			d_lim = v.begin()+ step - 1; // set down limit
 
+			// h_lim = j;
 			h_lim = j;
 
 			pos = v.begin() + (((std::distance(v.begin(), h_lim) / step) + 1) / 2 ) * step + step - 1;
@@ -96,8 +146,10 @@ void	insert(std::vector<int>& v, int depth) {
 			}
 
 			// insert
-			diff++;
-			j += (pos < j - 1) * step;
+			diff += 2 * step;
+			if (pos <= it - diff)
+				diff -= step;
+			// j += (pos < j - 1) * step;
 		}
 		// Finished part of insertion following jacosthal
 		it = v.begin() + (jacobsthal[jacob_idx]) * 2 * step  + step - 1;
@@ -130,15 +182,6 @@ void	sort(std::vector<int>& v, int depth) {
 		it += step;
 	}
 
-	// PRINT STATUS FOR TESTING PURPOSE
-	// std::cout << "Sorting depth = " << depth << " : ";
-	// for (std::vector<int>::const_iterator it = v.begin(); it != v.end(); ++it) {
-	// 	std::cout << *it;
-	// 	if (it + 1 != v.end())
-	// 		std::cout << " ";
-	// }
-	// std::cout << std::endl;
-
 	sort(v, depth + 1); // Perform recursion
 	
 					/* ----------------------------------------- */
@@ -153,7 +196,7 @@ void	sort(std::vector<int>& v, int depth) {
 
 
 	// Perform insertion part
-	insert(v, depth);
+	new_insert(v, depth);
 
 	return ;
 }
