@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:49 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/18 11:59:43 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:19:14 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	insert(std::vector<int>& v, int depth) {
 			std::copy(j - step / 2, j + 1, tmp.begin()); // Save vector to insert
 
 			// Perform binary search
-			d_lim = v.begin(); // set down limit
+			d_lim = v.begin()+ step - 1; // set down limit
 
 			h_lim = j;
 
@@ -67,9 +67,10 @@ void	insert(std::vector<int>& v, int depth) {
 			do {
 				if (*tmp.rbegin() < *pos) {
 					h_lim = pos;
-					pos -= std::ceil(std::distance(d_lim, h_lim) / 2.0) * step;
-					if (std::distance(d_lim, pos) < step - 1) {
-						pos = d_lim + step - 1;
+					// pos -= std::ceil(std::distance(d_lim, h_lim) / 2.0) * step;
+					pos -= std::ceil(std::distance(d_lim, h_lim) / 2.0);
+					if (std::distance(d_lim, pos) < step) {
+						pos = d_lim;
 						break ;
 					}
 					continue;

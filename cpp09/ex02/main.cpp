@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:50:53 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/11 22:49:46 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:26:58 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	main(int ac, char *av[]) {
 	sort(v, 0);
 
 	// Print after sort
-	std::cout << "After : ";
+	std::cout << std::endl;
+	// std::cout << "After : ";
 	for (std::vector<int>::const_iterator it = v.begin(); it != v.end(); ++it) {
 		std::cout << *it;
 		if (it + 1 != v.end())
