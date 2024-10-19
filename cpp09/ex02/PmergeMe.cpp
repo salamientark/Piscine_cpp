@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:49 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/18 23:49:30 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/19 13:04:57 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ void new_insert(std::vector<int>& v, int depth) {
 	std::vector<int>::iterator	d_lim, h_lim, pos; // binary search variable
 	std::vector<int>::iterator	v_it, res_it, to_insert_it, end, a; // vector iterator
 	// std::vector<int>			res(v.size()), to_insert(v.size() / 2); // tmp vector when inserting
-	std::vector<int>			res(v.size()), to_insert(std::ceil(((v.size() - 2 * step) /  step) / 2.0) * step);
+	int			res_len = step * (std::floor((v.size()/ (2.0 * step)) - 1) + 2);
+	std::vector<int>			res(v.size()), to_insert(((v.size() - res_len) / step) * step);
+
+	if (to_insert.size() == 0)
+		return ;
 
 	// Fill the res and to insert vector
 	std::copy(v.begin(), v.begin() + 2 * step, res.begin());
@@ -79,18 +83,21 @@ void new_insert(std::vector<int>& v, int depth) {
 
 			// Prepare For binary search
 			d_lim = res.begin() + step - 1; // Set down limit
-			h_lim = res.end() - 1 - (to_insert.size() - (pos - to_insert.begin())) * step;
+
+			// TO FIX
+			h_lim = res.begin() + res_len - 1;
+			// h_lim = res.end() - 1 - (to_insert.size() - (pos - to_insert.begin())) * step;
 			// h_lim = res.begin() + 2 * step - 1 + ((v.size() - 2 * step) / 2) / step + diff;
 
-			res_it = d_lim + (std::distance(d_lim, h_lim) / step) / 2;
+			res_it = d_lim + std::floor((std::distance(d_lim, h_lim) / step) / 2) * step;
 			// res_it = res.begin() + std::ceil((std::distance(d_lim, h_lim) / step) / 2);
 			// if (std::distance(d_lim, h_lim) == static_cast<long int>(step))
 			// 	res_it = d_lim;
 			do {
 				if (*pos < *res_it) {
 					h_lim = res_it;
-					res_it -= std::ceil((std::distance(d_lim, h_lim) / step) / 2.0);
-					if (res_it < d_lim) {
+					res_it -= std::ceil(((static_cast<float>(std::distance(d_lim, h_lim)) / step) / 2.0)) * step;
+					if (res_it <= d_lim) {
 						res_it = d_lim;
 						break ;
 					}
@@ -101,8 +108,8 @@ void new_insert(std::vector<int>& v, int depth) {
 					if (res_it + step == h_lim)
 						res_it = h_lim;
 					else
-						res_it += std::ceil((std::distance(d_lim, h_lim) / step) / 2);
-					// res_it += std::ceil(std::distance(d_lim, h_lim) / 2.0) * step;
+						res_it += std::ceil(((static_cast<float>(std::distance(d_lim, h_lim)) / step) / 2.0)) * step;
+						// res_it += ((static_cast<float>(std::distance(d_lim, h_lim)) / step) / 2.0) * step;
 					if (res_it >= h_lim) {
 						res_it = h_lim;
 						break ;
@@ -110,7 +117,8 @@ void new_insert(std::vector<int>& v, int depth) {
 					continue;
 				}
 				break ;
-			} while ( std::distance(d_lim, h_lim) / step > 1 );
+			} while ( pos != d_lim );
+			// } while ( std::distance(d_lim, h_lim) / step > 1 );
 			// if (res_it != h_lim && *pos > *res_it)
 			if (*pos > *res_it)
 				res_it += step;
@@ -120,10 +128,11 @@ void new_insert(std::vector<int>& v, int depth) {
 			std::copy(pos + 1 - step, pos + 1, res_it - step + 1);
 
 			diff++;
+			res_len += step;
 		}
 		jacob_idx++;
 		// SIZE CHECK IS FALSE BECAUS EWE ALLOCATED TO MUCH
-		if (std::distance(to_insert.begin(), to_insert.begin() + jacobsthal[jacob_idx - 1] * step - 1) >= static_cast<long int>(to_insert.size()))
+		if (std::distance(to_insert.begin(), to_insert.begin() + (jacobsthal[jacob_idx - 1] + 1) * step - 1) >= static_cast<long int>(to_insert.size()))
 		// if (std::distance(to_insert.begin(), to_insert.begin() + (jacobsthal[jacob_idx - 1] + 1) * step - 1) >= static_cast<long int>(to_insert.size()))
 			break ;
 
