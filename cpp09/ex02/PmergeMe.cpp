@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:49 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/19 14:27:36 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:31:22 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #include <algorithm>
 #include <cmath>
 #include <iterator>
-#include <ostream>
-#include <sstream>
-#include <iostream>
 #include <vector>
 
 /* ************************************************************************** */
@@ -87,11 +84,10 @@ static void insert(std::vector<int>& v, int depth) {
 				if (*pos < *res_it) {
 					h_lim = res_it;
 					res_it -= std::ceil(((static_cast<float>(std::distance(d_lim, h_lim)) / step) / 2.0)) * step;
-					if (res_it <= d_lim) {
-						res_it = d_lim;
-						break ;
-					}
-					continue;
+					if (!(res_it <= d_lim))
+						continue;
+					res_it = d_lim;
+					break ;
 				}
 				if (*pos > *(res_it + step)) {
 					d_lim = res_it;
@@ -99,11 +95,10 @@ static void insert(std::vector<int>& v, int depth) {
 						res_it = h_lim;
 					else
 						res_it += std::ceil(((static_cast<float>(std::distance(d_lim, h_lim)) / step) / 2.0)) * step;
-					if (res_it >= h_lim) {
-						res_it = h_lim;
-						break ;
-					}
-					continue;
+					if (!(res_it >= h_lim))
+						continue;
+					res_it = h_lim;
+					break ;
 				}
 				break ;
 			} while ( pos != d_lim );
@@ -133,7 +128,7 @@ static void insert(std::vector<int>& v, int depth) {
 }
 
 
-void	sort(std::vector<int>& v, int depth) {
+void	merge_insert_sort(std::vector<int>& v, int depth) {
 	int	step = (1 << depth);	// define iterator step
 	
 	if (v.size() / step < 2)	// only one element in list of size 2^step
@@ -148,7 +143,7 @@ void	sort(std::vector<int>& v, int depth) {
 		it += step;
 	}
 
-	sort(v, depth + 1); // Perform recursion
+	merge_insert_sort(v, depth + 1); // Perform recursion
 	
 					/* ----------------------------------------- */
 	insert(v, depth);

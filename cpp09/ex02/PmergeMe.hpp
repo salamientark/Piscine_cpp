@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:40:20 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/17 11:30:43 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:31:09 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ class InvalidInputException : public std::exception {
 
 std::vector<int>	init(int ac, char **av);
 
-void	sort(std::vector<int>& v, int depth);
+void	merge_insert_sort(std::vector<int>& v, int depth);
 
 #endif // !PMERGEME_HPP

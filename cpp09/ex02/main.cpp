@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:50:53 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/18 12:26:58 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:31:42 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int ac, char *av[]) {
 
 	// sort
 	std::cout << "sort" << std::endl;
-	sort(v, 0);
+	merge_insert_sort(v, 0);
 
 	// Print after sort
 	std::cout << std::endl;
