@@ -6,12 +6,14 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:50:53 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/10/19 14:31:42 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/10/19 15:14:08 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <ctime>
 #include <deque>
+#include <iomanip>
 #include <iostream>
 
 int	main(int ac, char *av[]) {
@@ -20,9 +22,12 @@ int	main(int ac, char *av[]) {
 		std::cerr << "Error: no argument." << std::endl;
 		return (0);
 	}
+
 	std::vector<int>	v;
-	std::list<int>		l;
-	// Initialize vector and list form argument
+	std::deque<int>		d;
+	int vector_clock, deque_clock;
+
+	// Initialize vector and deque form argument
 	try {
 		int					tmp;
 		char				c;
@@ -36,7 +41,7 @@ int	main(int ac, char *av[]) {
 			if (s >> c)
 				throw (InvalidInputException());
 			v.push_back(tmp);
-			// l.push_back(tmp);
+			d.push_back(tmp);
 		}
 	}
 	catch (InvalidInputException& e) {
@@ -45,26 +50,25 @@ int	main(int ac, char *av[]) {
 	}
 
 	// print vector
-	std::cout << "Before with std::vector<int> : ";
+	std::cout << "Before : ";
 	for (std::vector<int>::const_iterator it = v.begin(); it != v.end(); ++it) {
 		std::cout << *it;
 		if (it + 1 != v.end())
 			std::cout << " ";
 	}
-	std::cout << std::endl;
-	// Print list
-	std::cout << "Before with std::list<int> : ";
-	for (std::list<int>::const_iterator it = l.begin(); it != l.end(); ++it)
-		std::cout << *it << " ";
 	std::cout << std::endl;
 
 	// sort
-	std::cout << "sort" << std::endl;
-	merge_insert_sort(v, 0);
+	vector_clock = std::clock();
+	sort(v, 0);
+	vector_clock = std::clock() - vector_clock;
+
+	deque_clock = std::clock();
+	sort(d, 0);
+	deque_clock = std::clock() - deque_clock;
 
 	// Print after sort
-	std::cout << std::endl;
-	// std::cout << "After : ";
+	std::cout << "After : ";
 	for (std::vector<int>::const_iterator it = v.begin(); it != v.end(); ++it) {
 		std::cout << *it;
 		if (it + 1 != v.end())
@@ -72,6 +76,13 @@ int	main(int ac, char *av[]) {
 	}
 	std::cout << std::endl;
 
+	// Print Time consumed
+	std::cout << "Time to process a range of " << std::setw(7) << ac - 1
+		<< " elements with std::vector<int> : " << vector_clock << " operations."
+		<< std::endl;
 
+	std::cout << "Time to process a range of " << std::setw(7) << ac - 1
+		<< " elements with std::deque<int> : " << deque_clock << " operations."
+		<< std::endl;
 	return (0);
 }
