@@ -22,7 +22,7 @@ public:
 	DiamondTrap( void );
 	DiamondTrap( std::string name );
 	DiamondTrap( DiamondTrap const & rhs );
-	~DiamondTrap();
+	virtual ~DiamondTrap();
 
 	DiamondTrap& operator=( DiamondTrap const & rhs );
 

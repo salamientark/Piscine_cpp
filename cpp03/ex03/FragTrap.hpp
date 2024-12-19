@@ -21,7 +21,7 @@ public:
 	FragTrap( void );
 	FragTrap( std::string name );
 	FragTrap( FragTrap const & rhs );
-	~FragTrap();
+	virtual ~FragTrap();
 
 	FragTrap& operator=( FragTrap const & rhs );
 
