@@ -21,7 +21,7 @@ public:
 	ScavTrap( void );
 	ScavTrap( std::string name );
 	ScavTrap( ScavTrap const & rhs );
-	~ScavTrap();
+	virtual ~ScavTrap();
 
 	ScavTrap& operator=( ScavTrap const & rhs );
 

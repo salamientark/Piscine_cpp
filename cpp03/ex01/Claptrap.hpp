@@ -19,7 +19,7 @@ public:
 	ClapTrap( void ); // Canonical
 	ClapTrap( std::string name );
 	ClapTrap( ClapTrap const & rhs ); // Canonical
-	~ClapTrap(); // Canonical
+	virtual ~ClapTrap(); // Canonical
 
 	ClapTrap& operator=( ClapTrap const & rhs ); // Canonical
 
