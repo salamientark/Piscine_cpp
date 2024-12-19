@@ -23,7 +23,7 @@ DiamondTrap::DiamondTrap( void ) : ClapTrap("_clap_name"), _name()
 	std::cout << "DiamondTrap " << this->ClapTrap::_name
 		<< " was created using default DiamondTrap Constructor" << std::endl;
 	this->_hp = FragTrap::_hp;
-	this->_ep = ScavTrap::_ep;
+	this->_ep = SCAVTRAP_EP;
 	this->_damage = FragTrap::_damage;
 	
 	return ;
