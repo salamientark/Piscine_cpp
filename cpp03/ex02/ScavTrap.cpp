@@ -63,10 +63,13 @@ ScavTrap::~ScavTrap( void )
 /* ************************************************************************** */
 ScavTrap&	ScavTrap::operator=( ScavTrap const & rhs )
 {
-	this->_name = rhs.getName();
-	this->_hp = rhs.getHP();
-	this->_ep = rhs.getEP();
-	this->_damage = rhs.getDamage();
+	std::cout << "Scavtrap assignment operator called" << std::endl;
+	if (this != &rhs) {
+		this->_name = rhs.getName();
+		this->_hp = rhs.getHP();
+		this->_ep = rhs.getEP();
+		this->_damage = rhs.getDamage();
+	}
 
 	return (*this);
 }
