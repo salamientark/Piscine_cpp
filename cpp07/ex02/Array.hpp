@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 17:26:11 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/12/20 18:24:46 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 19:27:16 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ class Array {
 		}
 
 		T&			operator[](unsigned int index){
+			if (index < 0 || index >= this->_size)
+				throw (std::exception());
+			return (this->_content[index]);
+		}
+
+		const T&			operator[](unsigned int index) const {
 			if (index < 0 || index >= this->_size)
 				throw (std::exception());
 			return (this->_content[index]);
