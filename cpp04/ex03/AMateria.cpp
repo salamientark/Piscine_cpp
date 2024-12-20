@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:35:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/21 15:58:41 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:32:37 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ std::string	const & AMateria::getType( void ) const
 /* ************************************************************************** */
 AMateria& AMateria::operator=( AMateria const & rhs )
 {
-	std::cout << "Called AMateria assignment operator" << std::endl;
-	this->type = rhs.getType();
+	if (this != &rhs) {
+		std::cout << "Called AMateria assignment operator" << std::endl;
+		this->type = rhs.getType();
+	}
 	return (*this);
 }
 

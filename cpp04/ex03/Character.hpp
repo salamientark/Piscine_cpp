@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 20:52:42 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/21 18:35:18 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:48:22 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ public:
 	void use(int idx, ICharacter& target);
 
 	static AMateria*	floor[10];
+	static int			flr_idx;
 
 private:
 	std::string	_name;

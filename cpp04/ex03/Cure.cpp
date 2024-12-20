@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 20:33:34 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/21 16:02:06 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:54:47 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ Cure::~Cure( void )
 /* ************************************************************************** */
 Cure& Cure::operator=( Cure const & rhs )
 {
+	(void) &rhs;
 	std::cout << "Called Cure assignment operator" << std::endl;
-	this->type = rhs.getType();
 	return (*this);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 15:41:57 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/21 18:40:03 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:54:14 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ int main()
 	glgl->unequip(1);
 	glgl->unequip(1);
 	glgl->unequip(2);
+
+	for (int i = 0; i <= 15; i++) {
+		tmp = src->createMateria((i % 2 == 0 ? "cure" : "ice"));
+		glgl->equip(tmp);
+	}
 
 	for (int i = 0; i < 10; i++) {
 		if (Character::floor[i])

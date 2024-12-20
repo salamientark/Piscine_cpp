@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 20:58:57 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/21 18:35:39 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:52:39 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 AMateria* Character::floor[10] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 NULL, NULL, NULL};
+int Character::flr_idx = 0;
 
 /* ************************************************************************** */
 /*                           Constructor and Destructors                      */
@@ -71,12 +72,14 @@ std::string	const &	Character::getName() const
 /* ************************************************************************** */
 Character& Character::operator=( Character const & rhs )
 {
-	std::cout << "Called Character assignment operator" << std::endl;
-	this->_name = rhs.getName();
-	for (int i = 0; i < 3; i++) {
-		if (this->_inventory[i])
-			delete(this->_inventory[i]);
-		this->_inventory[i] = rhs.getInventoryIdx(i)->clone();
+	if (this != &rhs) {
+		std::cout << "Called Character assignment operator" << std::endl;
+		this->_name = rhs.getName();
+		for (int i = 0; i < 3; i++) {
+			if (this->_inventory[i])
+				delete(this->_inventory[i]);
+			this->_inventory[i] = rhs.getInventoryIdx(i)->clone();
+		}
 	}
 	return (*this);
 }
@@ -98,6 +101,10 @@ void	Character::equip(AMateria* m)
 		}
 	}
 	std::cout << "* equip() : Inventory is full *" << std::endl;
+	if (Character::floor[Character::flr_idx] != NULL)
+		delete Character::floor[Character::flr_idx];
+	Character::floor[Character::flr_idx] = m;
+	Character::flr_idx = (Character::flr_idx + 1) % 10;
 	return ;
 }
 
@@ -114,11 +121,10 @@ void	Character::unequip(int idx)
 			<< std::endl;
 		return ;
 	}
-	int	i = 0;
-	while (i < 10 && Character::floor[i])
-		i++;
-	i %= 10;
-	Character::floor[i] = this->_inventory[idx];
+	if (Character::floor[Character::flr_idx] != NULL)
+		delete Character::floor[Character::flr_idx];
+	Character::floor[Character::flr_idx] = this->_inventory[idx];
+	Character::flr_idx = (Character::flr_idx + 1) % 10;
 	this->_inventory[idx] = NULL;
 	return ;
 }

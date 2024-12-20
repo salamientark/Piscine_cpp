@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 20:22:56 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/21 16:02:31 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:55:04 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ Ice::~Ice( void )
 /* ************************************************************************** */
 Ice& Ice::operator=( Ice const & rhs )
 {
-	std::cout << "Called Ice assignment operator" << std::endl;
-	this->type = rhs.getType();
+	(void)rhs;
 	return (*this);
 }
 
