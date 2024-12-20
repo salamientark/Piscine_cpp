@@ -31,8 +31,12 @@ int	main( void )
 	xavien.attack(john.getName());
 	john.takeDamage(xavien.getDamage());
 	
+	std::cout << std::endl;
+
 	DiamondTrap	olivian("olivian");
 	std::cout << "Olivian has " << olivian.getEP() << " Energy point." << std::endl;
+	olivian.highFivesGuys();
+	olivian.guardGate();
 	olivian.whoAmI();
 	olivian.attack(john.getName());
 	john.takeDamage(olivian.getDamage());

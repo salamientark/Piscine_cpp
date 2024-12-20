@@ -18,19 +18,19 @@
 /* ************************************************************************** */
 /*                           Constructor and Destructors                      */
 /* ************************************************************************** */
-DiamondTrap::DiamondTrap( void ) : ClapTrap(), _name("_clap_name")
+DiamondTrap::DiamondTrap( void ) : ClapTrap("_clap_name"), _name()
 {
 	std::cout << "DiamondTrap " << this->ClapTrap::_name
 		<< " was created using default DiamondTrap Constructor" << std::endl;
 	this->_hp = FragTrap::_hp;
-	this->_ep = ScavTrap::_ep;
+	this->_ep = SCAVTRAP_EP;
 	this->_damage = FragTrap::_damage;
 	
 	return ;
 }
 
 DiamondTrap::DiamondTrap( std::string name )
-	: ClapTrap(name), _name(name + "_clap_name")
+	: ClapTrap(name + "_clap_name"), _name(name)
 {
 	std::cout << "DiamondTrap " << this->ClapTrap::_name
 		<< " was created using parametric DiamondTrap Constructor" << std::endl;
@@ -66,11 +66,13 @@ DiamondTrap::~DiamondTrap( void )
 /* ************************************************************************** */
 DiamondTrap&	DiamondTrap::operator=( DiamondTrap const & rhs )
 {
-	this->_name = rhs.getName();
-	this->_hp = rhs.getHP();
-	this->_ep = rhs.getEP();
-	this->_damage = rhs.getDamage();
-
+	std::cout << "DiamondTrap assignment operator called" << std::endl;
+	if (this != &rhs) {
+		this->_name = rhs.getName();
+		this->_hp = rhs.getHP();
+		this->_ep = rhs.getEP();
+		this->_damage = rhs.getDamage();
+	}
 	return (*this);
 }
 

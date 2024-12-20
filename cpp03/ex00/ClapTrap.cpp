@@ -70,11 +70,13 @@ int			ClapTrap::getDamage( void ) const
 /* ************************************************************************** */
 ClapTrap&	ClapTrap::operator=( ClapTrap const & rhs )
 {
-	this->_name = rhs.getName();
-	this->_hp = rhs.getHP();
-	this->_ep = rhs.getEP();
-	this->_damage = rhs.getDamage();
-
+	std::cout << "Assignment operator called" << std::endl;
+	if (this != &rhs) {
+		this->_name = rhs.getName();
+		this->_hp = rhs.getHP();
+		this->_ep = rhs.getEP();
+		this->_damage = rhs.getDamage();	
+	}
 	return (*this);
 }
 

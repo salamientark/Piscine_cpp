@@ -22,7 +22,7 @@ FragTrap::FragTrap( void ) : ClapTrap()
 	std::cout << "FragTrap " << this->_name
 		<< " was created using default FragTrap Constructor" << std::endl;
 	this->_hp = 100;
-	this->_ep = 50;
+	this->_ep = 100;
 	this->_damage = 30;
 	
 	return ;
@@ -33,8 +33,8 @@ FragTrap::FragTrap( std::string name ) : ClapTrap(name)
 	std::cout << "FragTrap " << this->_name
 		<< " was created using parametric FragTrap Constructor" << std::endl;
 	this->_hp = 100;
-	this->_ep = 50;
-	this->_damage = 20;
+	this->_ep = 100;
+	this->_damage = 30;
 	
 	return ;
 }
@@ -63,10 +63,13 @@ FragTrap::~FragTrap( void )
 /* ************************************************************************** */
 FragTrap&	FragTrap::operator=( FragTrap const & rhs )
 {
-	this->_name = rhs.getName();
-	this->_hp = rhs.getHP();
-	this->_ep = rhs.getEP();
-	this->_damage = rhs.getDamage();
+	std::cout << "FragTrap assignment operator called" << std::endl;
+	if (this != &rhs) {
+		this->_name = rhs.getName();
+		this->_hp = rhs.getHP();
+		this->_ep = rhs.getEP();
+		this->_damage = rhs.getDamage();	
+	}
 
 	return (*this);
 }

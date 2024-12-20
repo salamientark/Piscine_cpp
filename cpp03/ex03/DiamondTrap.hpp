@@ -15,14 +15,16 @@
 
 # include "ScavTrap.hpp"
 # include "FragTrap.hpp"
-#include <string>
+# include <string>
+
+# define SCAVTRAP_EP 50
 
 class DiamondTrap : public ScavTrap, public FragTrap {
 public:
 	DiamondTrap( void );
 	DiamondTrap( std::string name );
 	DiamondTrap( DiamondTrap const & rhs );
-	~DiamondTrap();
+	virtual ~DiamondTrap();
 
 	DiamondTrap& operator=( DiamondTrap const & rhs );
 
