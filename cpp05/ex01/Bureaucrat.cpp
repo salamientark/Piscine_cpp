@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:35:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 18:19:39 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:00:19 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ int	Bureaucrat::getGrade( void ) const
 /* ************************************************************************** */
 Bureaucrat& Bureaucrat::operator=( Bureaucrat const & rhs )
 {
-	this->_grade = rhs.getGrade();
+	if (this != &rhs) {
+		this->_grade = rhs.getGrade();
+	}
 	return (*this);
 }
 

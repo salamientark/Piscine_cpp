@@ -6,11 +6,12 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:16:54 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 12:19:21 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:56:34 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include <exception>
 #include <iostream>
 #include <ostream>
 
@@ -48,11 +49,7 @@ int	main( void )
 
 		std::cout << "*** Shouldn't be print *** " << std::endl;
 	}
-	catch (Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -70,11 +67,7 @@ int	main( void )
 
 		std::cout << "*** Shouldn't be print" << std::endl;
 	}
-	catch (Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -95,11 +88,7 @@ int	main( void )
 		std::cout << "*** Shouldn't be print" << std::endl;
 		std::cout << josekin << std::endl;
 	}
-	catch (Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -111,27 +100,19 @@ int	main( void )
 		std::cout << "*** Shouldn't be print" << std::endl;
 		std::cout << josekin << std::endl;
 	}
-	catch (Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
 	try
 	{
-		std::cout << "> Invalid instance Bureaucrat(\"Josekin\", 150)"  << std::endl;
-		Bureaucrat josekin = Bureaucrat("Josekin", 150);
+		std::cout << "> Invalid instance Bureaucrat(\"Josekin\", 151)"  << std::endl;
+		Bureaucrat josekin = Bureaucrat("Josekin", 151);
 
 		std::cout << "*** Shouldn't be print" << std::endl;
 		std::cout << josekin << std::endl;
 	}
-	catch (Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
