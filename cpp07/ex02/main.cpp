@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 17:43:33 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/24 18:19:13 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:29:57 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ int	main( void )
 	try {
 		std::cout << "Try filling b[6]" << std::endl;
 		b[6] = 6;
+
+		std::cout << "*** SHOULD NOT APPEAR ***" << std::endl;
+	}
+	catch (std::exception& e) {
+		std::cerr << "Out of bound access" << std::endl;
+	}
+
+	try {
+		std::cout << "Try filling b[-1]" << std::endl;
+		b[-1] = 6;
 
 		std::cout << "*** SHOULD NOT APPEAR ***" << std::endl;
 	}

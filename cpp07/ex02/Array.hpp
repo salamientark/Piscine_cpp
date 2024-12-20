@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 17:26:11 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/24 18:18:54 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:24:46 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,19 @@ class Array {
 		};
 
 		Array<T>& operator=( Array<T>& rhs ){
-			delete[](this->_content);
-			this->_size = rhs.size();
-			this->_content = new T[this->_size];
-			for (unsigned int i = 0; i < this->_size; i++){
-				this->_content[i] = rhs[i];
-				// this->_content[i] = rhs.getContentIdx(i);
+			if (this != &rhs) {
+				delete[](this->_content);
+				this->_size = rhs.size();
+				this->_content = new T[this->_size];
+				for (unsigned int i = 0; i < this->_size; i++){
+					this->_content[i] = rhs[i];
+				}
 			}
 			return (*this);
 		}
 
 		T&			operator[](unsigned int index){
-			if (index >= this->_size)
+			if (index < 0 || index >= this->_size)
 				throw (std::exception());
 			return (this->_content[index]);
 		}
