@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:19:24 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 15:24:56 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:10:55 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ WrongCat::~WrongCat( void )
 /* ************************************************************************** */
 WrongCat& WrongCat::operator=( WrongCat const & rhs )
 {
-	this->type = rhs.getType();
+	if (this != &rhs) {
+		std::cout << "Called WrongCat assignment operator" << std::endl;
+		this->type = rhs.getType();
+	}
 	return (*this);
 }
 

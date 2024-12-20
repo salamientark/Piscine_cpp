@@ -6,11 +6,12 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:53:11 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 18:37:52 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/19 23:38:30 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
+#include "Brain.hpp"
 
 /* ************************************************************************** */
 /*                           Constructor and Destructors                      */
@@ -23,16 +24,17 @@ Dog::Dog( void ) : Animal(), _brain(new Brain())
 }
 
 
-Dog::Dog( Dog const & rhs ) : Animal( rhs ), _brain(new Brain())
+Dog::Dog( Dog const & rhs ) : Animal( rhs ), _brain(new Brain(*rhs._brain))
 {
-	*this = rhs;
+	// this->_type = "dog";
 	std::cout << "Called copy Dog Constructor" << std::endl;
 	return ;
 }
 
 Dog::~Dog( void )
 {
-	delete(this->_brain);
+	if (this->_brain)
+		delete(this->_brain);
 	std::cout << "Called default Dog Destructor" << std::endl;
 	return ;
 }
@@ -46,8 +48,13 @@ Dog::~Dog( void )
 /* ************************************************************************** */
 Dog& Dog::operator=( Dog const & rhs )
 {
-	std::cout << "Called Dog assignment operator" << std::endl;
-	this->type = rhs.getType();
+	if (this != &rhs) {
+		std::cout << "Called Dog assignment operator" << std::endl;
+		if (this->_brain != NULL)
+			delete this->_brain;
+		this->_brain = new Brain(*rhs._brain);
+		this->type = rhs.getType();
+	}
 	return (*this);
 }
 

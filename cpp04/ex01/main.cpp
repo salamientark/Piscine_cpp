@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:00:41 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 18:46:03 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:15:29 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@ int main()
 	delete i;
 
 	// Own test part
+	std::cout << std::endl;
+
+	Dog* a = new Dog();
+	Dog* b = new Dog(*a);
+
+	Dog *c = new Dog();
+
+	delete a;
+	delete b;
+	delete c;
+
+	std::cout << std::endl;
 	
 	const Animal*	array[6]; // Create an animal array
 

@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 18:04:13 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 18:36:56 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:15:46 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ const std::string*	Brain::getIdeas( void ) const
 /* ************************************************************************** */
 Brain&	Brain::operator=( Brain const & rhs)
 {
-	std::cout << "Called Brain assignment operator" << std::endl;
-	for (int i = 0; i < 100; i++)
-		this->ideas[i] = rhs.getIdeas()[i];
+	if (this != &rhs) {
+		std::cout << "Called Brain assignment operator" << std::endl;
+		for (int i = 0; i < 100; i++)
+			this->ideas[i] = rhs.getIdeas()[i];
+	}
 	return (*this);
 }
 

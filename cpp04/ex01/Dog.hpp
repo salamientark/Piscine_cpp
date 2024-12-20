@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:34:24 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 18:10:20 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/19 23:31:40 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ class Dog : public Animal {
 	public:
 		Dog( void );
 		Dog( Dog const & rhs );
-		~Dog();
+		virtual ~Dog();
 
 		Dog& operator=( Dog const & rhs );
 
