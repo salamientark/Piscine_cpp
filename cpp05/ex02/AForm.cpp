@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 08:51:19 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 18:40:20 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:03:52 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ int					AForm::getExecGrade( void ) const
 /* ************************************************************************** */
 AForm& AForm::operator=( AForm const & rhs )
 {
-	this->_signed = rhs.getSigned();
+	if (this != &rhs) {
+		this->_signed = rhs.getSigned();
+	}
 	return (*this);
 }
 
