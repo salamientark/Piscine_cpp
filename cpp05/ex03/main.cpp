@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:16:54 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/23 09:50:09 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:19:26 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 
 int	main( void )
 {
+	// Subject test
+	{
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		delete rrf;
+	}
+	std::cout << std::endl;
+
+
 	Intern	john;
 	AForm*	shrub;
 	AForm*	robo; 	
@@ -31,7 +41,7 @@ int	main( void )
 		/*
 		 * Try Basic test
 		 */
-		std::cout << std::string("*", 80) << std::endl;
+		std::cout << std::string(60, '*') << std::endl;
 		std::cout << "Creating all forms" << std::endl;
 
 		shrub = john.makeForm("shruberry creation", "yoyo");
@@ -70,30 +80,30 @@ int	main( void )
 	/*
 	 * Trying to execute not signed form
 	 */
-	// try
-	// {
-	// 	Bureaucrat	admin = Bureaucrat("admin", 1);
-	// 	Bureaucrat	newbie = Bureaucrat("newbie", 149);
-	// 	ShruberryCreationForm	shrub = ShruberryCreationForm("yaya");
-	// 	RobotomyRequestForm		robo = RobotomyRequestForm("josuine");
-	// 	PresidentialPardonForm	pres = PresidentialPardonForm("john rambo");
-	//
-	// 	std::cout << std::endl << std::string(80, '*') << std::endl;
-	// 	std::cout << "* Testing Form not signed *" << std::endl;
-	// 	admin.signForm(shrub);
-	// 	admin.signForm(robo);
-	// 	admin.signForm(robo);
-	//
-	// 	std::cout << admin << std::endl;
-	// 	std::cout << robo << std::endl;
-	// 	admin.executeForm(pres);
-	// 	
-	// 	std::cout << "*** SHOULD NOT APPEAR ***" << std::endl;
-	// }
-	// catch  (std::exception& e)
-	// {
-	// 	std::cout << std::endl;
-	// }
+	try
+	{
+		Bureaucrat	admin = Bureaucrat("admin", 1);
+		Bureaucrat	newbie = Bureaucrat("newbie", 149);
+		ShruberryCreationForm	shrub = ShruberryCreationForm("yaya");
+		RobotomyRequestForm		robo = RobotomyRequestForm("josuine");
+		PresidentialPardonForm	pres = PresidentialPardonForm("john rambo");
+
+		std::cout << std::endl << std::string(80, '*') << std::endl;
+		std::cout << "* Testing Form not signed *" << std::endl;
+		admin.signForm(shrub);
+		admin.signForm(robo);
+		admin.signForm(robo);
+
+		std::cout << admin << std::endl;
+		std::cout << robo << std::endl;
+		admin.executeForm(pres);
+		
+		std::cout << "*** SHOULD NOT APPEAR ***" << std::endl;
+	}
+	catch  (std::exception& e)
+	{
+		std::cout << std::endl;
+	}
 
 	return (0);
 }

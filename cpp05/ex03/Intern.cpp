@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:32:12 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/23 09:48:36 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:18:36 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,17 @@ AForm*	Intern::makeForm( std::string name, std::string target )
 {
 	AForm* res;
 
-	const std::string	_form_name_[3] = {"shruberry creation",
+	static const std::string	_form_name_[3] = {"shruberry creation",
 		"robotomy request", "presidential pardon"};
 
-	AForm* (Intern::*_form_func_[3])(std::string target) const =
+	static AForm* (Intern::*_form_func_[3])(std::string target) const =
 		{&Intern::makeShruberryForm, &Intern::makeRobotomyForm,
 			&Intern::makePresidentialForm };
 	for (int i = 0; i < 3; i++)
 	{
 		if (name.compare(_form_name_[i]) == 0){
 			res = ((this->*_form_func_[i])(target));
-			std::cout << "Intern creates " << *res << std::endl;
+			std::cout << "Intern creates " << name << std::endl;
 			return (res);
 		}
 	}
