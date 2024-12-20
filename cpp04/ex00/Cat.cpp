@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:45:45 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 18:40:17 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:10:03 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ Cat::~Cat( void )
 /* ************************************************************************** */
 Cat& Cat::operator=( Cat const & rhs )
 {
-	std::cout << "Called Cat assignment operator" << std::endl;
-	this->type = rhs.getType();
+	if (this != &rhs) {
+		std::cout << "Called Cat assignment operator" << std::endl;
+		this->type = rhs.getType();
+	}
 	return (*this);
 }
 

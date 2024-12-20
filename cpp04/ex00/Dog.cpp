@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:53:11 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 18:40:45 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:09:08 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ Dog::~Dog( void )
 /* ************************************************************************** */
 Dog& Dog::operator=( Dog const & rhs )
 {
-	std::cout << "Called Dog assignment operator" << std::endl;
-	this->type = rhs.getType();
+	if (this != &rhs) {
+		std::cout << "Called Dog assignment operator" << std::endl;
+		this->type = rhs.getType();
+	}
 	return (*this);
 }
 
