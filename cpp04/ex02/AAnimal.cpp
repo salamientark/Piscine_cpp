@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:35:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 18:57:05 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:20:33 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ std::string	AAnimal::getType( void ) const
 /* ************************************************************************** */
 AAnimal& AAnimal::operator=( AAnimal const & rhs )
 {
-	std::cout << "Called AAnimal assignment operator" << std::endl;
-	this->type = rhs.getType();
+	if (this != &rhs) {
+		std::cout << "Called AAnimal assignment operator" << std::endl;
+		this->type = rhs.getType();
+	}
 	return (*this);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:00:41 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/20 19:04:24 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:23:17 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,18 @@ int main()
 	delete i;
 
 	// Own test part
-	
-	// AAnimal	kok;					// Won't work because we can't
-	// AAnimal*	kok = new AAnimal();	// initialize abstract class
+	std::cout << std::endl;
+
+	Dog* a = new Dog();
+	Dog* b = new Dog(*a);
+
+	Dog *c = new Dog();
+
+	delete a;
+	delete b;
+	delete c;
+
+	std::cout << std::endl;
 	
 	const AAnimal*	array[6]; // Create an animal array
 
@@ -45,8 +54,7 @@ int main()
 	for (int i = 0; i < 6; i++)
 	{
 		std::cout << "Adresse of array[" << i << "] : " << std::hex << array[i]
-			<< " --> " << array[i]->getType() << " ";
-		array[i]->makeSound();
+			<< " --> " << array[i]->getType() << std::endl;
 	}
 	std::cout << std::endl;
 
@@ -55,6 +63,8 @@ int main()
 		delete(array[i]);
 		std::cout << std::endl;
 	}
+
+	// AAnimal test;
 
 	return 0;
 }
