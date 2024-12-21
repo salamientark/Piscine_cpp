@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 08:51:19 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/22 18:10:14 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:00:39 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ int					Form::getExecGrade( void ) const
 /* ************************************************************************** */
 Form& Form::operator=( Form const & rhs )
 {
-	this->_signed = rhs.getSigned();
+	if (this != &rhs) {
+		this->_signed = rhs.getSigned();
+	}
 	return (*this);
 }
 

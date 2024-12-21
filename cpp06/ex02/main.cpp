@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:36:09 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/24 13:35:42 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:51:41 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	main( void )
 	identify(c_ptr);
 	identify(c_ptr);
 	identify(c_ptr);
+
+	identify(NULL);
+	// int *test;
+	// *test = 42;
+	// identify(test);
 	std::cout << std::endl;
 
 	std::cout << std::string(80, '*') << std::endl

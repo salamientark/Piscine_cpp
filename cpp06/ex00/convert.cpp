@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:33:23 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/09/24 11:39:51 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:16:04 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static int	is_param_valid( std::string str )
 	int	len = str.length();
 	int i;
 
-	if (len == 0 || (len > 1 && !(std::isdigit(str[0]) || str[0] == '-')))
+	if (len == 0 || (len > 1 && !(std::isdigit(str[0]) || str[0] == '-' || str[0] == '+')))
 		return (0);
 	if (len == 1)
 		return (1);
-	i = (str[0] == '-');
+	i = (str[0] == '-' || str[0] == '+');
 	while (i < len && std::isdigit(str[i])) { i++; };
 	if (i == len || (i == len - 1 && (str[i] == '.' || str[i] == 'f')))
 		return (1);
 	if (str[i] != '.')
-		return (1);
+		return (0);
 	i++;
 	while (i < len && std::isdigit(str[i])) { i++; };
 	return (i == len || (i == len - 1 && str[i] == 'f'));
@@ -138,10 +138,10 @@ static void	print_result(int ival, float fval, double dval, int precision)
 
 void	ScalarClass::convert( std::string param )
 {
-	int		ival;
-	float	fval;
-	int		precision;
-	double	dval;
+	int		ival = 0;
+	float	fval = 0;
+	int		precision = 0;
+	double	dval = 0;
 
 	if (is_special_case(param))
 		return ;
